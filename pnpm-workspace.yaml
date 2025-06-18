@@ -1,0 +1,3 @@
+packages:
+  - "packages/music-client"
+  - "packages/music-server"
