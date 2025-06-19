@@ -23,7 +23,7 @@ export default function useGetSongs() {
           title: string;
           artist: string;
           genre: string;
-        };
+        }[];
       }>(GET_SONGS);
       return data.songs;
     },
