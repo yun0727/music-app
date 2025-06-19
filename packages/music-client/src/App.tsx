@@ -1,6 +1,7 @@
-import { graphqlClient } from "@/graphqlClient";
 import useGetSongs from "@/hooks/useGetSongs";
+import ErrorFallBack from "@/presentionals/common/ErrorFallBack";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ErrorBoundary } from "react-error-boundary";
 
 const queryClient = new QueryClient();
 
@@ -8,7 +9,10 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <div className="bg-red-100 w-full h-full">
-        <TempComponent />
+        <h1>hello</h1>
+        <ErrorBoundary FallbackComponent={ErrorFallBack}>
+          <TempComponent />
+        </ErrorBoundary>
       </div>
     </QueryClientProvider>
   );

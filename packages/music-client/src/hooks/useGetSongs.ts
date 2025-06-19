@@ -27,5 +27,6 @@ export default function useGetSongs() {
       }>(GET_SONGS);
       return data.songs;
     },
+    throwOnError: true,
   });
 }
