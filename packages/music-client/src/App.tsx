@@ -1,3 +1,4 @@
+import AudioContainer from "@/containers/player/AudioContainer";
 import useGetSongs from "@/hooks/useGetSongs";
 import ErrorFallBack from "@/presentationals/common/ErrorFallBack";
 import RootLayout from "@/presentationals/common/RootLayout";
@@ -27,7 +28,9 @@ function App() {
           </div>
         </SlidePanel>
       </RootLayout>
-      <PlayerWrapper />
+      <PlayerWrapper>
+        <AudioContainer src="../public/nodens-field-song-6041.mp3.mp3" />
+      </PlayerWrapper>
     </QueryClientProvider>
   );
 }

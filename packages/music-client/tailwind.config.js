@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 import colors from "./tailwind/colors";
-// import { range } from "./tailwind/input";
+import { range } from "./tailwind/input";
 
 const px0_200 = Array.from({ length: 201 }, (_, i) => `${i}px`);
 const px0_20 = px0_200.slice(0, 21);
@@ -16,7 +16,5 @@ export default {
       colors,
     },
   },
-  plugins: [
-    // range
-  ],
+  plugins: [range],
 };
