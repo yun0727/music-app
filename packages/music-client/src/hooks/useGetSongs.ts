@@ -18,12 +18,7 @@ export default function useGetSongs() {
     queryKey: ["songs"],
     queryFn: async () => {
       const data = await graphqlClient.request<{
-        songs: {
-          id: number;
-          title: string;
-          artist: string;
-          genre: string;
-        }[];
+        songs: Song[];
       }>(GET_SONGS);
       return data.songs;
     },
