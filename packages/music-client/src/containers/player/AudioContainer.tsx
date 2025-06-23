@@ -2,6 +2,8 @@ import ProgressBar from "@/containers/player/ProgressBar";
 import VolumeController from "@/containers/player/VolumeController";
 import useAudioPlayer from "@/hooks/player/useAudioPlayer";
 import PlayButton from "@/presentationals/player/PlayButton";
+import PlayListButton from "@/presentationals/player/PlayListButton";
+import { useAppStore } from "@/store";
 
 interface Props {
   src?: string;
@@ -19,6 +21,7 @@ export default function AudioContainer({ src }: Props) {
     changeCurrentTime,
     changeVolume,
   } = useAudioPlayer();
+  const { togglePlayList } = useAppStore();
   return (
     <div className="flex justify-center items-end pt-18 pb-22">
       <div className="flex flex-col gap-y-16">
@@ -40,7 +43,8 @@ export default function AudioContainer({ src }: Props) {
           />
         </div>
       </div>
-      <div className="ml-61">
+      <div className="ml-61 flex">
+        <PlayListButton className="mr-10" onClick={() => togglePlayList()} />
         <VolumeController onChange={(v) => changeVolume(v)} volume={volume} />
       </div>
       <audio ref={audioRef} src={src} />

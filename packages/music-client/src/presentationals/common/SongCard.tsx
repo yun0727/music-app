@@ -13,38 +13,42 @@ function SongCard({
   variant,
   children,
   className,
-}: Cn<PropsWithChildren<{ variant: Variant }>>) {
+  onClick,
+}: Cn<PropsWithChildren<{ variant: Variant; onClick?: () => void }>>) {
   const variantClass =
     variant === "vertical"
       ? "flex-col gap-y-16"
-      : "flex-row gap-x-14 items-center";
+      : "flex-row gap-x-14 items-center w-full";
   return (
     <SongCardContext.Provider value={{ variant }}>
       <motion.div
         whileTap="tap"
         whileHover="hover"
-        variants={
-          variant === "vertical"
+        variants={{
+          hover: { background: "rgba(255, 255, 255, 0.1)" },
+          ...(variant === "vertical"
             ? {
                 tap: { scale: 0.95 },
                 rest: { background: "transparent" },
-                hover: { background: "rgba(255, 255, 255, 0.1)" },
               }
-            : {}
-        }
+            : {}),
+        }}
         initial="rest"
         className={tw(variantClass, "flex relative p-9 rounded-6", className)}
+        onClick={onClick}
       >
         {children}
-        <motion.span
-          className="absolute right-14 top-130"
-          variants={{
-            hover: { y: "-10", opacity: 1 },
-            rest: { opacity: 0, y: 0 },
-          }}
-        >
-          <PlayButton status="paused" onToggle={() => {}} />
-        </motion.span>
+        {variant === "vertical" && (
+          <motion.span
+            className="absolute right-14 top-130"
+            variants={{
+              hover: { y: "-10", opacity: 1 },
+              rest: { opacity: 0, y: 0 },
+            }}
+          >
+            <PlayButton status="paused" onToggle={() => {}} />
+          </motion.span>
+        )}
       </motion.div>
     </SongCardContext.Provider>
   );
