@@ -17,7 +17,7 @@ export default function SectionPanel({ songs, title, moreLink }: Props) {
         </a>
       </Section.Title>
       <Section.Content>
-        <div className="flex gap-x-20">
+        <div className="flex">
           {songs?.map((song) => (
             <SongCard key={song.id} variant="vertical" className="shrink-0">
               <SongCard.Image

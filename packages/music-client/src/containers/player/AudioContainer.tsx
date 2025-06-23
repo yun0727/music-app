@@ -38,7 +38,6 @@ export default function AudioContainer({ src }: Props) {
             duration={duration}
             onChange={(seconds) => changeCurrentTime(seconds)}
           />
-          <p>{}</p>
         </div>
       </div>
       <div className="ml-61">

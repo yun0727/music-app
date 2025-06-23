@@ -2,7 +2,7 @@ import AudioContainer from "@/containers/player/AudioContainer";
 import useGetSongs from "@/hooks/useGetSongs";
 import ErrorFallBack from "@/presentationals/common/ErrorFallBack";
 import RootLayout from "@/presentationals/common/RootLayout";
-import SlidePanel from "@/presentationals/common/SlidePanel";
+import SliderPanel from "@/presentationals/common/SliderPanel";
 import SectionPanel from "@/presentationals/home/SectionPanel";
 import PlayerWrapper from "@/presentationals/player/playerWrapper";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -22,11 +22,11 @@ function App() {
           <TempComponent />
         </ErrorBoundary>
         <button onClick={handleOpen}>open</button>
-        <SlidePanel open={open} onClose={handleClose}>
+        <SliderPanel open={open} onClose={handleClose}>
           <div className="w-[300px]">
             <h3>재생목록</h3>
           </div>
-        </SlidePanel>
+        </SliderPanel>
       </RootLayout>
       <PlayerWrapper>
         <AudioContainer src="../public/nodens-field-song-6041.mp3.mp3" />
