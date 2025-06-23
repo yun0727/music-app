@@ -11,12 +11,14 @@ export const typeDefs = gql`
     title: String!
     artist: Artist!
     songs: [Song!]
+    thumbnail: String!
   }
   type Song {
     id: ID!
     title: String!
     genres: [Genre!]!
     album: Album!
+    path: String!
   }
   type Genre {
     id: ID!

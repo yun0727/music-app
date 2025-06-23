@@ -20,13 +20,12 @@ export default function SectionPanel({ songs, title, moreLink }: Props) {
         <div className="flex">
           {songs?.map((song) => (
             <SongCard key={song.id} variant="vertical" className="shrink-0">
-              <SongCard.Image
-                src={"https://picsum.photos/150"}
-                alt={song.title}
-              />
+              <SongCard.Image src={song.album.thumbnail} alt={song.title} />
               <SongCard.Content>
                 <SongCard.Title>{song.title}</SongCard.Title>
-                <SongCard.Description>{song.artist}</SongCard.Description>
+                <SongCard.Description>
+                  {song.album.artist.name}
+                </SongCard.Description>
               </SongCard.Content>
             </SongCard>
           ))}
