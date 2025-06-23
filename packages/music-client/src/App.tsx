@@ -5,16 +5,29 @@ import RootLayout from "@/presentationals/common/RootLayout";
 import SliderPanel from "@/presentationals/common/SliderPanel";
 import SectionPanel from "@/presentationals/home/SectionPanel";
 import PlayerWrapper from "@/presentationals/player/playerWrapper";
+import { useAppStore } from "@/store";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
 const queryClient = new QueryClient();
 
 function App() {
   const [open, setOpen] = useState(false);
+  const { currentSong, setCurrentSong } = useAppStore();
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  useEffect(() => {
+    setCurrentSong({
+      id: 1,
+      title: "Song 1",
+      artist: "Artist 1",
+      genre: "rock",
+      path: "http://localhost:4000/audio/nodens-field-song-6041.mp3.mp3",
+    });
+  }, [setCurrentSong]);
   return (
     <QueryClientProvider client={queryClient}>
       <RootLayout>
@@ -29,7 +42,7 @@ function App() {
         </SliderPanel>
       </RootLayout>
       <PlayerWrapper>
-        <AudioContainer src="../public/nodens-field-song-6041.mp3.mp3" />
+        <AudioContainer src={currentSong?.path} />
       </PlayerWrapper>
     </QueryClientProvider>
   );
