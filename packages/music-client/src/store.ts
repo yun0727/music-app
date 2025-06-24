@@ -11,7 +11,7 @@ interface AppState {
 interface Action {
   setCurrentSong: (song: Song) => void;
   togglePlayList: () => void;
-  addToPlayList: (song: Song) => void;
+  addToPlayList: (songs: Song[]) => void;
   removeFromPlayList: (song: Song) => void;
   setPlaylist: (playlist: Song[]) => void;
   likeSong: (song: Song) => void;
@@ -31,8 +31,8 @@ export const useAppStore = create<AppState & Action>()((set) => ({
   setCurrentSong: (song: Song) => set({ currentSong: song }),
   togglePlayList: () =>
     set((state) => ({ isPlayListExpanded: !state.isPlayListExpanded })),
-  addToPlayList: (song: Song) =>
-    set((state) => ({ playlist: [...state.playlist, song] })),
+  addToPlayList: (songs: Song[]) =>
+    set((state) => ({ playlist: [...state.playlist, ...songs] })),
   removeFromPlayList: (song: Song) =>
     set((state) => ({
       playlist: state.playlist.filter((s) => s.id !== song.id),

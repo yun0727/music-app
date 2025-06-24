@@ -4,6 +4,7 @@ import useGetSongs from "@/hooks/useGetSongs";
 import ErrorFallBack from "@/presentationals/common/ErrorFallBack";
 import RootLayout from "@/presentationals/common/RootLayout";
 import SliderPanel from "@/presentationals/common/SliderPanel";
+import MixMakerContainer from "@/presentationals/home/MixMakerContainer";
 import SectionPanel from "@/presentationals/home/SectionPanel";
 import PlayerWrapper from "@/presentationals/player/playerWrapper";
 import { useAppStore } from "@/store";
@@ -20,6 +21,7 @@ function App() {
       <RootLayout>
         <ErrorBoundary FallbackComponent={ErrorFallBack}>
           <TempComponent />
+          <MixMakerContainer />
         </ErrorBoundary>
         <SliderPanel open={isPlayListExpanded}>
           <PlaylistContainer />
@@ -37,7 +39,7 @@ function TempComponent() {
   const { addToPlayList } = useAppStore();
   return (
     <SectionPanel
-      onItemClick={(song) => addToPlayList(song)}
+      onItemClick={(song) => addToPlayList([song])}
       moreLink="/"
       songs={data ?? []}
       title="패캠을 위한 음악 추천"

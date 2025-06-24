@@ -4,11 +4,17 @@
 > >
 > > > -\*\*[SectionPanel](./src/presentationals/home/SectionPanel.tsx)<br>
 > > >
-> > > > -\*\*[SectionTitle](./src/presentationals/common/Section.tsx)<br>
-> > >
-> > > > -\*\*[SectionContent](./src/presentationals/common/Section.tsx)<br>
+> > > > -[Section](#section)<br>
 > > > >
 > > > > > -[SongCard->](#song-card)<br>
+>
+> > -\*\*[MixMakerContainer](./src/presentationals/home/MixMakerContainer.tsx)<br>
+> >
+> > > -\*\*[MixMakerPanel](./src/presentationals/home/MixMakerPanel.tsx)
+> > >
+> > > > -[Section](#section)
+> > > >
+> > > > > -[SongCard](#song-card)
 >
 > > -\*\*[SliderPanel](./src/presentationals/common/SliderPanel.tsx)<br>
 > >
@@ -35,6 +41,12 @@
 > > > -\*\*[VolumeController](./src/containers/player/VolumeController.tsx)<br>
 > > >
 > > > > -\*\*[Slider](./src/presentationals/player/Slider.tsx)<br>
+
+# [section](./src/presentationals/common/Section.tsx)
+
+> -[SectionTitle](./src/presentationals/common/Section.tsx)
+>
+> -[SectionContent](./src/presentationals/common/Section.tsx)
 
 # [song-card ](./src/presentationals/common/SongCard.tsx)
 

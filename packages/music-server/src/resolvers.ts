@@ -33,6 +33,20 @@ export const resolvers = {
           songs: true,
         },
       }),
+    //query getMixMakers
+    mixMakers: async () =>
+      prisma.mixMaker.findMany({
+        include: {
+          songs: {
+            include: {
+              genres: true,
+              album: {
+                include: { artist: true },
+              },
+            },
+          },
+        },
+      }),
   },
   Mutation: {
     // typeDefs에서 정의한 Mutation에 대한 resolver 함수
@@ -54,13 +68,15 @@ export const resolvers = {
         title,
         albumId,
         genreIds,
-      }: { title: string; albumId: string; genreIds: string[] }
+        path,
+      }: { title: string; albumId: string; genreIds: string[]; path: string }
     ) => {
       const song = await prisma.song.create({
         data: {
           title,
           album: { connect: { id: parseInt(albumId) } },
           genres: { connect: genreIds.map((id) => ({ id: parseInt(id) })) },
+          path,
         },
         include: {
           album: true,
@@ -75,7 +91,13 @@ export const resolvers = {
         title,
         releaseDate,
         artistId,
-      }: { title: string; releaseDate: string; artistId: string }
+        thumbnail,
+      }: {
+        title: string;
+        releaseDate: string;
+        artistId: string;
+        thumbnail: string;
+      }
     ) => {
       const artist = await prisma.artist.findUnique({
         where: { id: parseInt(artistId) },
@@ -88,12 +110,35 @@ export const resolvers = {
           title,
           releaseDate: new Date(releaseDate),
           artist: { connect: { id: parseInt(artistId) } },
+          thumbnail,
         },
         include: {
           artist: true,
         },
       });
       return album;
+    },
+    addMixMaker: async (
+      _: any,
+      {
+        name,
+        description,
+        songIds,
+      }: { name: string; description: string; songIds: string[] }
+    ) => {
+      const mixMaker = await prisma.mixMaker.create({
+        data: {
+          name,
+          description,
+          songs: {
+            connect: songIds.map((id) => ({
+              id: parseInt(id),
+            })),
+          },
+        },
+        include: { songs: true },
+      });
+      return mixMaker;
     },
   },
 };

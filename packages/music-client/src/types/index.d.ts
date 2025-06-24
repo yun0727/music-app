@@ -33,3 +33,10 @@ interface Playlist {
   name: string;
   songs: Song[];
 }
+
+interface MixMaker {
+  id: string;
+  name: string;
+  description: string;
+  songs: Song[];
+}

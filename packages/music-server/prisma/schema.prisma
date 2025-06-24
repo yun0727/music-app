@@ -31,17 +31,25 @@ model Album {
 }
 
 model Song {
-  id        Int      @id @default(autoincrement())
+  id        Int        @id @default(autoincrement())
   title     String
   path      String
-  genres    Genre[]  @relation("SongToGenre")
-  createdAt DateTime @default(now())
-  album     Album    @relation(fields: [albumId], references: [id])
+  genres    Genre[]    @relation("SongToGenre")
+  createdAt DateTime   @default(now())
+  album     Album      @relation(fields: [albumId], references: [id])
   albumId   Int
+  mixMakers MixMaker[] @relation("SongToMixMaker")
 }
 
 model Genre {
   id    Int    @id @default(autoincrement())
   name  String
   songs Song[] @relation("SongToGenre")
+}
+
+model MixMaker {
+  id          Int    @id @default(autoincrement())
+  name        String
+  description String
+  songs       Song[] @relation("SongToMixMaker")
 }
