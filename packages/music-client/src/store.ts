@@ -13,6 +13,7 @@ interface Action {
   togglePlayList: () => void;
   addToPlayList: (song: Song) => void;
   removeFromPlayList: (song: Song) => void;
+  setPlaylist: (playlist: Song[]) => void;
   likeSong: (song: Song) => void;
   unlikeSong: (song: Song) => void;
   // 플레이리스트 추가
@@ -36,6 +37,7 @@ export const useAppStore = create<AppState & Action>()((set) => ({
     set((state) => ({
       playlist: state.playlist.filter((s) => s.id !== song.id),
     })),
+  setPlaylist: (playlist: Song[]) => set({ playlist }),
   likeSong: (song: Song) =>
     set((state) => ({ likedSongs: { ...state.likedSongs, song } })),
   unlikeSong: (song: Song) =>
