@@ -1,40 +1,38 @@
-> -[RootLayout](./src/presentationals/common/RootLayout.tsx) <br>
+> -\*\*[RootLayout](./src/presentationals/common/RootLayout.tsx) <br>
 >
-> > -[TempComponent](./src/App.tsx)<br>
+> > -\*\*[TempComponent](./src/App.tsx)<br>
 > >
-> > > -[SectionPanel](./src/presentationals/home/SectionPanel.tsx)<br>
+> > > -\*\*[SectionPanel](./src/presentationals/home/SectionPanel.tsx)<br>
 > > >
-> > > > -[SectionTitle](./src/presentationals/common/Section.tsx)<br>
+> > > > -\*\*[SectionTitle](./src/presentationals/common/Section.tsx)<br>
 > > >
-> > > > -[SectionContent](./src/presentationals/common/Section.tsx)<br>
-> > > >
-> > > > > -[SongCard->](#song-card)<br>
-> > > > >
-> > > > > > -[PlayButton](./src/presentationals/player/PlayButton.tsx)<br>
->
-> > -[SliderPanel](./src/presentationals/common/SliderPanel.tsx)<br>
-> >
-> > > -[PlaylistContainer](./src/containers/home/PlaylistContainer.tsx)<br>
-> > >
-> > > > -[PlaylistItem](./src/presentationals/home/PlaylistItem.tsx) <br>
+> > > > -\*\*[SectionContent](./src/presentationals/common/Section.tsx)<br>
 > > > >
 > > > > > -[SongCard->](#song-card)<br>
 >
-> -[PlayerWrapper](./src/presentationals/player/playerWrapper.tsx)<br>
+> > -\*\*[SliderPanel](./src/presentationals/common/SliderPanel.tsx)<br>
+> >
+> > > -\*\*[PlaylistContainer](./src/containers/home/PlaylistContainer.tsx)<br>
+> > >
+> > > > -\*\*[PlaylistItem](./src/presentationals/home/PlaylistItem.tsx) <br>
+> > > >
+> > > > > -[SongCard->](#song-card)<br>
 >
-> > -[AudioContainer](./src/containers/player/AudioContainer.tsx)<br>
+> -\*\*[PlayerWrapper](./src/presentationals/player/playerWrapper.tsx)<br>
+>
+> > -\*\*[AudioContainer](./src/containers/player/AudioContainer.tsx)<br>
 > >
-> > > -[playButton](./src/presentationals/player/PlayButton.tsx)<br>
+> > > -\*\*[playButton](./src/presentationals/player/PlayButton.tsx)<br>
 > >
-> > > -[ProgressBar](./src/containers/player/ProgressBar.tsx)<br>
+> > > -\*\*[ProgressBar](./src/containers/player/ProgressBar.tsx)<br>
 > > >
-> > > > -[Slider](./src/presentationals/player/Slider.tsx)<br>
+> > > > -\*\*[Slider](./src/presentationals/player/Slider.tsx)<br>
 > >
-> > > -[PlayListButton](./src/presentationals/player/PlayListButton.tsx)<br>
+> > > -\*\*[PlayListButton](./src/presentationals/player/PlayListButton.tsx)<br>
 > >
-> > > -[VolumeController](./src/containers/player/VolumeController.tsx)<br>
+> > > -\*\*[VolumeController](./src/containers/player/VolumeController.tsx)<br>
 > > >
-> > > > -[Slider](./src/presentationals/player/Slider.tsx)<br>
+> > > > -\*\*[Slider](./src/presentationals/player/Slider.tsx)<br>
 
 # [song-card ](./src/presentationals/common/SongCard.tsx)
 
@@ -45,3 +43,5 @@
 > > -[SongCardTitle](./src/presentationals/common/SongCard.tsx)<br>
 >
 > > -[SongCardDescription](./src/presentationals/common/SongCard.tsx)<br>
+>
+> -[PlayButton](./src/presentationals/player/PlayButton.tsx)<br>

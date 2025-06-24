@@ -26,29 +26,14 @@ function SongCard({
         whileHover="hover"
         variants={{
           hover: { background: "rgba(255, 255, 255, 0.1)" },
-          ...(variant === "vertical"
-            ? {
-                tap: { scale: 0.95 },
-                rest: { background: "transparent" },
-              }
-            : {}),
+          tap: { scale: 0.95 },
+          rest: { background: "rgba(255, 255, 255, 0)" },
         }}
         initial="rest"
         className={tw(variantClass, "flex relative p-9 rounded-6", className)}
         onClick={onClick}
       >
         {children}
-        {variant === "vertical" && (
-          <motion.span
-            className="absolute right-14 top-130"
-            variants={{
-              hover: { y: "-10", opacity: 1 },
-              rest: { opacity: 0, y: 0 },
-            }}
-          >
-            <PlayButton status="paused" onToggle={() => {}} />
-          </motion.span>
-        )}
       </motion.div>
     </SongCardContext.Provider>
   );
@@ -63,11 +48,24 @@ function SongCardImage({
   const variantClass =
     variant === "vertical" ? "rounded-6 size-150" : "rounded-4 size-50 mr-14";
   return (
-    <img
-      className={tw(variantClass, "object-cover", className)}
-      src={src}
-      alt={alt}
-    />
+    <div className="relative">
+      <img
+        className={tw(variantClass, "object-cover", className)}
+        src={src}
+        alt={alt}
+      />
+      {variant === "vertical" && (
+        <motion.span
+          className="absolute right-0 bottom-0 "
+          variants={{
+            hover: { y: 0, opacity: 1 },
+            rest: { opacity: 0, y: 9 },
+          }}
+        >
+          <PlayButton status="paused" onToggle={() => {}} />
+        </motion.span>
+      )}
+    </div>
   );
 }
 
