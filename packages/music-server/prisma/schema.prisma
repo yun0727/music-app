@@ -35,10 +35,11 @@ model Song {
   title     String
   path      String
   genres    Genre[]    @relation("SongToGenre")
-  createdAt DateTime   @default(now())
   album     Album      @relation(fields: [albumId], references: [id])
   albumId   Int
   mixMakers MixMaker[] @relation("SongToMixMaker")
+  tags      Tag[]      @relation("SongToTag")
+  createdAt DateTime   @default(now())
 }
 
 model Genre {
@@ -52,4 +53,10 @@ model MixMaker {
   name        String
   description String
   songs       Song[] @relation("SongToMixMaker")
+}
+
+model Tag {
+  id    Int    @id @default(autoincrement())
+  name  String
+  songs Song[] @relation("SongToTag")
 }
