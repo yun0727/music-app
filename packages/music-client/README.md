@@ -10,12 +10,20 @@
 >
 > > -\*\*[MixMakerContainer](./src/presentationals/home/MixMakerContainer.tsx)<br>
 > >
-> > > -\*\*[MixMakerPanel](./src/presentationals/home/MixMakerPanel.tsx)
+> > > -\*\*[MixMakerPanel](./src/presentationals/home/MixMakerPanel.tsx)<br>
 > > >
-> > > > -[Section](#section)
+> > > > -[Section](#section)<br>
 > > > >
-> > > > > -[SongCard](#song-card)
+> > > > > -[SongCard](#song-card)<br>
 >
+> > -[RecommendationsContainer](packages/music-client/src/presentationals/home/RecommendationsContainer.tsx)<br>
+> >
+> > > -[SectionPanel](./src/presentationals/home/SectionPanel.tsx)<br>
+> > >
+> > > > -[Section](#section)<br>
+> > > >
+> > > > > -[SongCard](#song-card)<br>
+
 > > -\*\*[SliderPanel](./src/presentationals/common/SliderPanel.tsx)<br>
 > >
 > > > -\*\*[PlaylistContainer](./src/containers/home/PlaylistContainer.tsx)<br>
@@ -44,7 +52,7 @@
 
 # [section](./src/presentationals/common/Section.tsx)
 
-> -[SectionTitle](./src/presentationals/common/Section.tsx)
+> -[SectionTitle](./src/presentationals/common/Section.tsx)<br>
 >
 > -[SectionContent](./src/presentationals/common/Section.tsx)
 
@@ -62,6 +70,6 @@
 
 # [menu]()
 
-> -[menuItem]()
+> -[menuItem]()<br>
 >
-> -[subMenu]()
+> -[subMenu]()<br>
