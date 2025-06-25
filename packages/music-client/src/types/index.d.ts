@@ -2,12 +2,18 @@ type Cn<T = unknown> = T & { className?: string };
 
 type AudioStatus = "playing" | "paused" | "stopped";
 
+interface Tag {
+  id: number;
+  name: string;
+}
+
 interface Song {
   id: number;
   title: string;
   genres: Genre[];
   album: Omit<Album, "songs">;
   path: string;
+  tags?: Tag[];
 }
 
 interface Genre {

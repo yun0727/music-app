@@ -10,6 +10,7 @@ import {
 import cors from "cors";
 import { expressMiddleware } from "@apollo/server/express4";
 import audioRouter from "./router/audioRouter";
+import musicRouter from "./router/musicRouter";
 
 // const server = new ApolloServer({ typeDefs, resolvers });
 async function startServer() {
@@ -21,14 +22,14 @@ async function startServer() {
     plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
   });
   await server.start();
-  app.use("/audio", audioRouter);
   app.use(
     cors({
       origin: "http://localhost:5173",
-    }),
-    express.json(),
-    expressMiddleware(server)
+    })
   );
+  app.use("/audio", audioRouter);
+  app.use("/music", musicRouter);
+  app.use(express.json(), expressMiddleware(server));
   httpServer.listen(4000, () => {
     console.log("Server is running on http://localhost:4000");
   });
