@@ -27,9 +27,13 @@ async function startServer() {
       origin: [
         "http://localhost:5173",
         "http://music-app-austru-bucket.s3-website.ap-northeast-2.amazonaws.com",
-        "https://music-app-austru-bucket.s3-website.ap-northeast-2.amazonaws.com"
+        "https://music-app-austru-bucket.s3-website.ap-northeast-2.amazonaws.com",
+        "http://43.201.107.123:4000",
+        "http://43.201.107.123"
       ],
-      credentials: true
+      credentials: true,
+      methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+      allowedHeaders: ["Content-Type", "Authorization"]
     })
   );
   app.use("/audio", audioRouter);
