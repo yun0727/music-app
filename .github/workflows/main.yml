@@ -29,9 +29,9 @@ jobs:
         run: pnpm --filter music-client build
         working-directory: ./
 
-      - name: Build Backend
-        run: pnpm --filter music-server build
-        working-directory: ./
+      # - name: Build Backend
+      #   run: pnpm --filter music-server build
+      #   working-directory: ./
 
       - name: Deploy # S3에 배포하기
         env:
