@@ -1,5 +1,5 @@
 name: React build
-on: 
+on:
   push: # main Branch에서 push 이벤트가 일어났을 때만 실행
     branches:
       - main
@@ -12,7 +12,7 @@ jobs:
         uses: actions/checkout@main
 
       - name: Cache node modules # node modules 캐싱
-        uses: actions/cache@v1
+        uses: actions/cache@v4
         with:
           path: node_modules # 프로젝트의 node_modules가 있는 경로로 설정
           key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
