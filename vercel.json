@@ -1,0 +1,5 @@
+{
+  "buildCommand": "pnpm --filter music-client build",
+  "outputDirectory": "packages/music-client/dist",
+  "framework": "vite"
+} 
