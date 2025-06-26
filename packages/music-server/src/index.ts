@@ -24,7 +24,12 @@ async function startServer() {
   await server.start();
   app.use(
     cors({
-      origin: "http://localhost:5173",
+      origin: [
+        "http://localhost:5173",
+        "http://music-app-austru-bucket.s3-website.ap-northeast-2.amazonaws.com",
+        "https://music-app-austru-bucket.s3-website.ap-northeast-2.amazonaws.com"
+      ],
+      credentials: true
     })
   );
   app.use("/audio", audioRouter);
