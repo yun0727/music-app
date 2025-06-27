@@ -4,6 +4,7 @@ import { useAppStore } from "@/store";
 
 export default function RecommendationsContainer() {
   const { playlist, addToPlayList } = useAppStore();
+  console.log(playlist);
   const tags = playlist
     .map((song) => [
       ...song.genres.map((genre) => genre.name),

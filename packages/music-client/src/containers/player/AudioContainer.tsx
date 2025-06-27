@@ -5,6 +5,9 @@ import PlayButton from "@/presentationals/player/PlayButton";
 import PlayListButton from "@/presentationals/player/PlayListButton";
 import { useAppStore } from "@/store";
 import { getAudioUrl } from "@/utils/audio";
+import ShuffleIcon from "@/assets/icons/shuffle.svg?react";
+import PrevIcon from "@/assets/icons/skip_next.svg?react";
+import RepeatIcon from "@/assets/icons/repeat.svg?react";
 
 interface Props {
   src?: string;
@@ -31,14 +34,15 @@ export default function AudioContainer({ src }: Props) {
     <div className="flex justify-center items-end pt-18 pb-22">
       <div className="flex flex-col gap-y-16">
         <div className="flex gap-x-20 w-[464px] justify-center">
-          <div>shuffle</div>
-          <div>prev</div>
+          <ShuffleIcon />
+          <PrevIcon className="rotate-180" />
+
           <PlayButton
             status={status}
             onToggle={status === "playing" ? pause : play}
           />
-          <button>next</button>
-          <button>repeat</button>
+          <PrevIcon />
+          <RepeatIcon />
         </div>
         <div className="flex justify-center gap-x-17">
           <ProgressBar
