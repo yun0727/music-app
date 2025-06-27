@@ -5,6 +5,7 @@ import svgr from "vite-plugin-svgr";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: "/",
   plugins: [react(), svgr()],
   resolve: {
     // alias: [{ find: "@/", replacement: path.resolve(__dirname, "./src/") }],
@@ -12,4 +13,20 @@ export default defineConfig({
       "@": path.resolve(__dirname, "src"),
     },
   },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://43.201.107.123:4000',
+        changeOrigin: true,
+        secure: false
+      }
+    }
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: undefined
+      }
+    }
+  }
 });

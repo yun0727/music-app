@@ -29,7 +29,9 @@ async function startServer() {
         "http://music-app-austru-bucket.s3-website.ap-northeast-2.amazonaws.com",
         "https://music-app-austru-bucket.s3-website.ap-northeast-2.amazonaws.com",
         "http://43.201.107.123:4000",
-        "http://43.201.107.123"
+        "http://43.201.107.123",
+        "https://*.vercel.app",
+        "https://*.vercel.app/*"
       ],
       credentials: true,
       methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],

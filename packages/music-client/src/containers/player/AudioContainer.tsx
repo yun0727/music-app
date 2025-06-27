@@ -4,6 +4,7 @@ import useAudioPlayer from "@/hooks/player/useAudioPlayer";
 import PlayButton from "@/presentationals/player/PlayButton";
 import PlayListButton from "@/presentationals/player/PlayListButton";
 import { useAppStore } from "@/store";
+import { getAudioUrl } from "@/utils/audio";
 
 interface Props {
   src?: string;
@@ -22,6 +23,10 @@ export default function AudioContainer({ src }: Props) {
     changeVolume,
   } = useAudioPlayer();
   const { togglePlayList } = useAppStore();
+
+  // Convert audio path to use proxy in production
+  const audioSrc = src ? getAudioUrl(src) : undefined;
+
   return (
     <div className="flex justify-center items-end pt-18 pb-22">
       <div className="flex flex-col gap-y-16">
@@ -47,7 +52,7 @@ export default function AudioContainer({ src }: Props) {
         <PlayListButton className="mr-10" onClick={() => togglePlayList()} />
         <VolumeController onChange={(v) => changeVolume(v)} volume={volume} />
       </div>
-      <audio ref={audioRef} src={src} />
+      <audio ref={audioRef} src={audioSrc} />
     </div>
   );
 }
