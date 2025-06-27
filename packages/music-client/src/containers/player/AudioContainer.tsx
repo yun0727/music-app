@@ -40,7 +40,7 @@ export default function AudioContainer({ src }: Props) {
           <button>next</button>
           <button>repeat</button>
         </div>
-        <div className="flex items-center gap-x-17">
+        <div className="flex justify-center gap-x-17">
           <ProgressBar
             currentTime={currentTime}
             duration={duration}
