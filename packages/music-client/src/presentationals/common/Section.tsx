@@ -17,7 +17,14 @@ function SectionTitle({ className, children }: Cn<PropsWithChildren>) {
 
 function SectionContent({ className, children }: Cn<PropsWithChildren>) {
   return (
-    <div className={tw("w-full overflow-x-scroll", className)}>{children}</div>
+    <div
+      className={tw(
+        "w-full overflow-x-scroll  [&::-webkit-scrollbar]:hidden",
+        className
+      )}
+    >
+      {children}
+    </div>
   );
 }
 
