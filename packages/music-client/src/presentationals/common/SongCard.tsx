@@ -55,15 +55,17 @@ function SongCardImage({
         alt={alt}
       />
       {variant === "vertical" && (
-        <motion.span
-          className="absolute right-0 bottom-0 "
+        <motion.div
+          className="absolute right-3 bottom-3 size-30"
           variants={{
             hover: { y: 0, opacity: 1 },
             rest: { opacity: 0, y: 9 },
           }}
         >
-          <PlayButton status="paused" onToggle={() => {}} />
-        </motion.span>
+          <div className="bg-black/70 backdrop-blur-sm rounded-full p-3 shadow-xl h-30">
+            <PlayButton status="paused" onToggle={() => {}} />
+          </div>
+        </motion.div>
       )}
     </div>
   );
