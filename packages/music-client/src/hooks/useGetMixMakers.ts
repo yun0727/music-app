@@ -18,6 +18,7 @@ const GET_MIX_MAKERS = gql`
             id
             name
           }
+          thumbnail
         }
       }
     }

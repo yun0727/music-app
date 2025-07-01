@@ -4,16 +4,15 @@ import { useAppStore } from "@/store";
 
 export default function RecommendationsContainer() {
   const { playlist, addToPlayList } = useAppStore();
-  console.log(playlist);
-  console.log(
-    playlist.map((song) => [...song.genres.map((genre) => genre.name)])
-  );
-  const tags = playlist
-    .map((song) => [
-      ...song.genres.map((genre) => genre.name),
-      ...(song.tags?.map((tag) => tag.name) ?? []),
-    ])
-    .flat();
+
+  const tags =
+    playlist
+      .map((song) => [
+        ...(song.genres?.map((genre) => genre.name) ?? []),
+        ...(song.tags?.map((tag) => tag.name) ?? []),
+      ])
+      .flat() ?? [];
+
   const { data } = useGetRecommendations(tags);
 
   return (
@@ -21,7 +20,7 @@ export default function RecommendationsContainer() {
       <SectionPanel
         songs={data}
         moreLink="/"
-        title="패캠을 위한 추천"
+        title="AI 추천 곡"
         onItemClick={(song) => addToPlayList([song])}
       />
     )

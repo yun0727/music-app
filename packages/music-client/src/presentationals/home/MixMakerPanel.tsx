@@ -28,9 +28,7 @@ export default function MixMakerPanel({
               key={mixMaker.id}
               variant="vertical"
               className="shrink-0"
-              onClick={() => {
-                onItemClick(mixMaker.songs);
-              }}
+              onClick={() => onItemClick(mixMaker.songs)}
             >
               <SongCard.Image src={getRandomThumbnail()} alt={mixMaker.id} />
               <SongCard.Content>
