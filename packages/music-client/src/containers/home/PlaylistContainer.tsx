@@ -49,8 +49,8 @@ export default function PlaylistContainer() {
               ) : (
                 playlist.map((song, index) => (
                   <Draggable
-                    key={song.id}
-                    draggableId={`${song.id}`}
+                    key={`${song.id}-${index}`}
+                    draggableId={`${song.id}-${index}`}
                     index={index}
                   >
                     {(provided) => (

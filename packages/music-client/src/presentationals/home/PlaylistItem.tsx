@@ -35,6 +35,7 @@ export default function PlaylistItem({
       >
         <MenuIcon />
       </button>
+
       {open && (
         <Menu
           className="absolute right-0 left-auto top-48 z-20"
@@ -42,7 +43,7 @@ export default function PlaylistItem({
         >
           <Menu.MenuItem
             label={
-              <div className="flex items-center">
+              <div className="flex">
                 <AddIcon className="mr-6" />
                 <span>플레이리스트에 추가하기</span>
               </div>
@@ -52,13 +53,13 @@ export default function PlaylistItem({
             <Menu.Submenu>
               <Menu.MenuItem
                 label={
-                  <div className="flex items-center">
+                  <div className="flex">
                     <AddIcon className="mr-6" />
                     <span>새 플레이리스트</span>
                   </div>
                 }
                 onSelect={() => onAddPlaylist(song)}
-                value="1"
+                value="sub1"
               />
               {playlists.map((playlist) => (
                 <Menu.MenuItem
@@ -71,7 +72,7 @@ export default function PlaylistItem({
           </Menu.MenuItem>
           <Menu.MenuItem
             label={
-              <div className="flex items-center">
+              <div className="flex">
                 <AddCircleIcon className="mr-6" />
                 <span>좋아요 표시한 곡에 저장하기</span>
               </div>
@@ -81,12 +82,12 @@ export default function PlaylistItem({
           />
           <Menu.MenuItem
             label={
-              <div className="flex items-center">
+              <div className="flex">
                 <DeleteIcon className="mr-6" />
                 <span>재생목록에서 삭제</span>
               </div>
             }
-            value="3"
+            value="2"
             onSelect={() => onRemoveFromPlaylist(song)}
           />
         </Menu>

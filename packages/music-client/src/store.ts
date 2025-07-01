@@ -32,7 +32,11 @@ export const useAppStore = create<AppState & Action>()((set) => ({
   togglePlayList: () =>
     set((state) => ({ isPlayListExpanded: !state.isPlayListExpanded })),
   addToPlayList: (songs: Song[]) =>
-    set((state) => ({ playlist: [...state.playlist, ...songs] })),
+    set((state) => {
+      const existingIds = new Set(state.playlist.map((song) => song.id));
+      const newSongs = songs.filter((song) => !existingIds.has(song.id));
+      return { playlist: [...state.playlist, ...newSongs] };
+    }),
   removeFromPlayList: (song: Song) =>
     set((state) => ({
       playlist: state.playlist.filter((s) => s.id !== song.id),

@@ -16,7 +16,6 @@ const GET_SONGS = gql`
         title
         thumbnail
       }
-
       genres {
         id
         name
