@@ -16,6 +16,7 @@ export const typeDefs = gql`
   type Song {
     id: ID!
     title: String!
+    team: String!
     genres: [Genre!]!
     album: Album!
     path: String!
@@ -52,6 +53,7 @@ export const typeDefs = gql`
     addArtist(name: String!): Artist!
     addSong(
       title: String!
+      team: String!
       albumId: ID!
       genreIds: [ID!]!
       path: String!

@@ -4,7 +4,6 @@ import { useAppStore } from "@/store";
 
 export default function RecommendationsContainer() {
   const { playlist, addToPlayList } = useAppStore();
-  console.log(playlist);
   const tags = playlist
     .map((song) => [
       ...song.genres.map((genre) => genre.name),
@@ -18,7 +17,7 @@ export default function RecommendationsContainer() {
         onItemClick={(song) => addToPlayList([song])}
         moreLink="/"
         songs={data}
-        title="패캠을 위한  추천"
+        title="AI 추천 곡"
       />
     )
   );

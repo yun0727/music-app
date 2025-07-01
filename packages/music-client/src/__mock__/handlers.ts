@@ -2,6 +2,7 @@ import { graphql, http, HttpResponse, passthrough } from "msw";
 
 export const handlers = [
   graphql.query("GetSongs", () => {
+    console.log("MSW: GetSongs query intercepted");
     return HttpResponse.json<{ data: { songs: Song[] } }>({
       data: {
         songs: [
@@ -118,7 +119,13 @@ export const handlers = [
     //   ],
     // });
   }),
-  http.get(/\/audio\/.*/, () => {
+  // 오디오 파일 요청을 실제 서버로 전달
+  http.get(/\/audio\/.*/, ({ request }) => {
+    console.log("MSW: Audio request intercepted:", request.url);
+    return passthrough();
+  }),
+  // ds 폴더의 오디오 파일도 실제 서버로 전달
+  http.get(/\/ds\/.*/, () => {
     return passthrough();
   }),
 ];

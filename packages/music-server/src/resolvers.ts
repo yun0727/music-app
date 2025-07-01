@@ -73,14 +73,22 @@ export const resolvers = {
       _: any,
       {
         title,
+        team,
         albumId,
         genreIds,
         path,
-      }: { title: string; albumId: string; genreIds: string[]; path: string }
+      }: {
+        title: string;
+        team: string;
+        albumId: string;
+        genreIds: string[];
+        path: string;
+      }
     ) => {
       const song = await prisma.song.create({
         data: {
           title,
+          team,
           album: { connect: { id: parseInt(albumId) } },
           genres: { connect: genreIds.map((id) => ({ id: parseInt(id) })) },
           path,

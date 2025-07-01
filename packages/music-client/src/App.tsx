@@ -16,7 +16,7 @@ const queryClient = new QueryClient();
 
 function App() {
   const { isPlayListExpanded, currentSong } = useAppStore();
-
+  console.log(isPlayListExpanded);
   return (
     <QueryClientProvider client={queryClient}>
       <RootLayout>
@@ -44,7 +44,7 @@ function TempComponent() {
       onItemClick={(song) => addToPlayList([song])}
       moreLink="/"
       songs={data ?? []}
-      title="패캠을 위한 음악 추천"
+      title="음악 추천"
     />
   );
 }

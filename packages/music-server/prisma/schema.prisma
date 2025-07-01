@@ -34,6 +34,7 @@ model Song {
   id        Int        @id @default(autoincrement())
   title     String
   path      String
+  team      String
   genres    Genre[]    @relation("SongToGenre")
   album     Album      @relation(fields: [albumId], references: [id])
   albumId   Int

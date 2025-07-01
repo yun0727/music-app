@@ -8,7 +8,7 @@ export default function MixMakerContainer() {
   return data ? (
     <MixMakerPanel
       mixMakers={data}
-      title="패캠을 위한 믹스메이커"
+      title="믹스메이커"
       onItemClick={addToPlayList}
     />
   ) : null;

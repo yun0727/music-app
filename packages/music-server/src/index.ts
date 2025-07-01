@@ -20,6 +20,7 @@ async function startServer() {
     typeDefs,
     resolvers,
     plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+    csrfPrevention: false,
   });
   await server.start();
   app.use(
@@ -31,16 +32,17 @@ async function startServer() {
         "http://43.201.107.123:4000",
         "http://43.201.107.123",
         "https://*.vercel.app",
-        "https://*.vercel.app/*"
+        "https://*.vercel.app/*",
       ],
       credentials: true,
       methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-      allowedHeaders: ["Content-Type", "Authorization"]
+      allowedHeaders: ["Content-Type", "Authorization"],
     })
   );
   app.use("/audio", audioRouter);
   app.use("/music", musicRouter);
-  app.use(express.json(), expressMiddleware(server));
+  app.use(express.json());
+  app.use(expressMiddleware(server));
   httpServer.listen(4000, () => {
     console.log("Server is running on http://localhost:4000");
   });
