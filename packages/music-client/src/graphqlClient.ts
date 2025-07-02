@@ -9,11 +9,15 @@ const getApiUrl = () => {
     return `${origin}/api/proxy`;
   }
   
-  // In development, use local proxy or direct connection
-  const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:4000";
-  return apiUrl;
+  // In development, also use AWS server for consistency
+  return "http://3.34.198.197:4000";
 };
 
 const endpoint = getApiUrl();
 
-export const graphqlClient = new GraphQLClient(endpoint);
+export const graphqlClient = new GraphQLClient(endpoint, {
+  headers: {
+    'x-apollo-operation-name': 'query',
+    'apollo-require-preflight': 'true'
+  }
+});
