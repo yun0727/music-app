@@ -7,6 +7,7 @@ const GET_SONGS = gql`
     songs {
       id
       title
+      path
       album {
         artist {
           id

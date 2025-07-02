@@ -14,7 +14,7 @@ export default function RecommendationsContainer() {
       .flat() ?? [];
 
   const { data } = useGetRecommendations(tags);
-
+  console.log(data);
   return (
     data && (
       <SectionPanel

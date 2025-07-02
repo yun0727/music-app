@@ -18,7 +18,6 @@ musicRouter.get("/recommendations", async (req, res) => {
       thumbnail: "https://picsum.photos/150",
     },
     genres: [],
-    path: "/audio/nodens-field-song-6041.mp3.mp3",
   }));
   res.json(songs);
 });

@@ -17,6 +17,7 @@ export default function PlaylistContainer() {
     addPlaylist,
     addSongToPlaylist,
     likeSong,
+    currentSong,
   } = useAppStore();
   //1. handler설정
   const handleOnDragEnd = (result: DropResult) => {
@@ -29,6 +30,7 @@ export default function PlaylistContainer() {
     items.splice(result.destination.index, 0, reorderedItem);
     setPlaylist(items);
   };
+  console.log(currentSong);
   return (
     <div className="flex flex-col h-full">
       <h1 className="px-30 py-20 text-gray200 text-24 font-medium w-[522px]">

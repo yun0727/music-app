@@ -16,6 +16,7 @@ const queryClient = new QueryClient();
 
 function App() {
   const { isPlayListExpanded, currentSong } = useAppStore();
+
   return (
     <QueryClientProvider client={queryClient}>
       <RootLayout>

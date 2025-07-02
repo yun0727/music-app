@@ -21,7 +21,7 @@ export const handlers = [
                 name: "rock",
               },
             ],
-            path: "/audio/nodens-field-song-6041.mp3.mp3",
+            path: "/audio/nodens-field-song-6041.mp3",
           },
           {
             id: 2,
@@ -38,7 +38,7 @@ export const handlers = [
                 name: "rock",
               },
             ],
-            path: "/audio/nodens-field-song-6041.mp3.mp3",
+            path: "/audio/nodens-field-song-6041.mp3",
           },
           {
             id: 3,
@@ -55,7 +55,7 @@ export const handlers = [
                 name: "rock",
               },
             ],
-            path: "/audio/nodens-field-song-6041.mp3.mp3",
+            path: "/audio/nodens-field-song-6041.mp3",
           },
           {
             id: 4,
@@ -72,7 +72,7 @@ export const handlers = [
                 name: "rock",
               },
             ],
-            path: "/audio/nodens-field-song-6041.mp3.mp3",
+            path: "/audio/nodens-field-song-6041.mp3",
           },
           {
             id: 5,
@@ -89,7 +89,7 @@ export const handlers = [
                 name: "rock",
               },
             ],
-            path: "/audio/nodens-field-song-6041.mp3.mp3",
+            path: "/audio/nodens-field-song-6041.mp3",
           },
           {
             id: 6,
@@ -106,7 +106,7 @@ export const handlers = [
                 name: "rock",
               },
             ],
-            path: "/audio/nodens-field-song-6041.mp3.mp3",
+            path: "/audio/nodens-field-song-6041.mp3",
           },
         ],
       },

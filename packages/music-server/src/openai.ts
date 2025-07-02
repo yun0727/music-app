@@ -13,6 +13,7 @@ export const getMusicRecommendations = async (tags: string) => {
           role: "user",
           content: `
           Suggest five pieces of music based on the following preferences: ${tags}.
+          and make path to this : 'www.naver.com'
           Provide the result in the following format:
         [
           {"artist", "Artist Name", "title":"Song Title", "album": "Album Title"},  

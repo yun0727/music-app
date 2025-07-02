@@ -4,7 +4,7 @@ import useAudioPlayer from "@/hooks/player/useAudioPlayer";
 import PlayButton from "@/presentationals/player/PlayButton";
 import PlayListButton from "@/presentationals/player/PlayListButton";
 import { useAppStore } from "@/store";
-import { getAudioUrl } from "@/utils/audio";
+// import { getAudioUrl } from "@/utils/audio";
 import ShuffleIcon from "@/assets/icons/shuffle.svg?react";
 import PrevIcon from "@/assets/icons/skip_next.svg?react";
 import RepeatIcon from "@/assets/icons/repeat.svg?react";
@@ -28,8 +28,8 @@ export default function AudioContainer({ src }: Props) {
   const { togglePlayList } = useAppStore();
 
   // Convert audio path to use proxy in production
-  const audioSrc = src ? getAudioUrl(src) : undefined;
-
+  // const audioSrc = src ? getAudioUrl(src) : undefined;
+  console.log(src);
   return (
     <div className="flex justify-center items-end pt-18 pb-22">
       <div className="flex flex-col gap-y-16">
@@ -56,7 +56,7 @@ export default function AudioContainer({ src }: Props) {
         <PlayListButton className="mr-10" onClick={() => togglePlayList()} />
         <VolumeController onChange={(v) => changeVolume(v)} volume={volume} />
       </div>
-      <audio ref={audioRef} src={audioSrc} />
+      <audio ref={audioRef} src={src} />
     </div>
   );
 }
