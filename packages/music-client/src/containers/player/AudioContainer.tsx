@@ -29,7 +29,7 @@ export default function AudioContainer({ src }: Props) {
 
   // Convert audio path to use proxy in production
   // const audioSrc = src ? getAudioUrl(src) : undefined;
-  console.log(src);
+
   return (
     <div className="flex justify-center items-end pt-18 pb-22">
       <div className="flex flex-col gap-y-16">
