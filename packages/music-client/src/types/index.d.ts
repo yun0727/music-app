@@ -10,6 +10,7 @@ interface Tag {
 interface Song {
   id: number;
   title: string;
+  team: string;
   genres: Genre[];
   album: Omit<Album, "songs">;
   path: string;

@@ -12,6 +12,9 @@ import { useAppStore } from "@/store";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ErrorBoundary } from "react-error-boundary";
 
+import AdminSongPage from "./pages/AdminSongPage";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
 const queryClient = new QueryClient();
 
 function App() {
@@ -19,19 +22,29 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <RootLayout>
-        <ErrorBoundary FallbackComponent={ErrorFallBack}>
-          <TempComponent />
-          <MixMakerContainer />
-          <RecommendationsContainer />
-        </ErrorBoundary>
-        <SliderPanel open={isPlayListExpanded}>
-          <PlaylistContainer />
-        </SliderPanel>
-      </RootLayout>
-      <PlayerWrapper>
-        <AudioContainer src={currentSong?.path} />
-      </PlayerWrapper>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/admin-song" element={<AdminSongPage />} />
+          <Route
+            path="/*"
+            element={
+              <RootLayout>
+                <ErrorBoundary FallbackComponent={ErrorFallBack}>
+                  <TempComponent />
+                  <MixMakerContainer />
+                  <RecommendationsContainer />
+                </ErrorBoundary>
+                <SliderPanel open={isPlayListExpanded}>
+                  <PlaylistContainer />
+                </SliderPanel>
+              </RootLayout>
+            }
+          />
+        </Routes>
+        <PlayerWrapper>
+          <AudioContainer src={currentSong?.path} />
+        </PlayerWrapper>
+      </BrowserRouter>
     </QueryClientProvider>
   );
 }
