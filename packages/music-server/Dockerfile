@@ -11,18 +11,19 @@ RUN npm install
 #Bundle app source
 COPY . .
 
-#prisma generate
+# prisma generate
 RUN npx prisma generate
 
 #Build
 RUN npm run build
 
 # Create startup script
-RUN echo '#!/bin/sh\nnpx prisma migrate deploy\nnpx prisma generate\nnpm start' > /app/start.sh
-RUN chmod +x /app/start.sh
+# RUN echo '#!/bin/sh\nnpx prisma migrate deploy\nnpx prisma generate\nnpm start' > /app/start.sh
+# RUN chmod +x /app/start.sh
 
-#start
-CMD ["/app/start.sh"]
+# #start
+# CMD ["/app/start.sh"]
+CMD [ "npm", "start" ]
 
-# expose port
+# # expose port
 EXPOSE 4000
