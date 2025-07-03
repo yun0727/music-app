@@ -15,19 +15,19 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      '/api': {
-        target: 'http://13.209.99.4:4000/graphql',
+      "/api": {
+        target: "http://3.37.17.190:4000/graphql",
         changeOrigin: true,
         secure: false,
-        rewrite: (path) => path.replace(/^\/api/, '')
-      }
-    }
+        rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+    },
   },
   build: {
     rollupOptions: {
       output: {
-        manualChunks: undefined
-      }
-    }
-  }
+        manualChunks: undefined,
+      },
+    },
+  },
 });
