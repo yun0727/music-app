@@ -8,16 +8,16 @@ const getApiUrl = () => {
     const origin = window.location.origin;
     return `${origin}/api/proxy`;
   }
-  
+
   // In development, also use AWS server for consistency
-  return "http://3.34.198.197:4000";
+  return "http://13.209.99.4:4000";
 };
 
 const endpoint = getApiUrl();
 
 export const graphqlClient = new GraphQLClient(endpoint, {
   headers: {
-    'x-apollo-operation-name': 'query',
-    'apollo-require-preflight': 'true'
-  }
+    "x-apollo-operation-name": "query",
+    "apollo-require-preflight": "true",
+  },
 });
