@@ -36,7 +36,7 @@ model Song {
   path      String
   team      String
   genres    Genre[]    @relation("SongToGenre")
-  album     Album      @relation(fields: [albumId], references: [id])
+  album     Album      @relation(fields: [albumId], references: [id], onDelete: Cascade)
   albumId   Int
   mixMakers MixMaker[] @relation("SongToMixMaker")
   tags      Tag[]      @relation("SongToTag")

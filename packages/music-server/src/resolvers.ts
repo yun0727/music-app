@@ -57,6 +57,7 @@ export const resolvers = {
   },
   Mutation: {
     // typeDefs에서 정의한 Mutation에 대한 resolver 함수
+
     addGenre: async (_: any, { name }: { name: string }) => {
       const genre = await prisma.genre.create({
         data: { name },
@@ -184,6 +185,39 @@ export const resolvers = {
         include: { tags: true },
       });
       return song;
+    },
+    deleteSong: async (_: any, { id }: { id: string }) => {
+      // 먼저 song이 존재하는지 확인
+      const existingSong = await prisma.song.findUnique({
+        where: { id: parseInt(id) },
+        include: {
+          album: {
+            include: { artist: true },
+          },
+          genres: true,
+          tags: true,
+          mixMakers: true,
+        },
+      });
+
+      if (!existingSong) {
+        throw new Error(`Song with ID ${id} not found`);
+      }
+
+      // song을 삭제 (관계는 cascade로 자동 처리됨)
+      const deletedSong = await prisma.song.delete({
+        where: { id: parseInt(id) },
+        include: {
+          album: {
+            include: { artist: true },
+          },
+          genres: true,
+          tags: true,
+          mixMakers: true,
+        },
+      });
+
+      return deletedSong;
     },
   },
 };

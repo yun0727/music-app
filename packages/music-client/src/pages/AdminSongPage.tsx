@@ -160,7 +160,7 @@ const AdminSongPage: React.FC = () => {
             <tr key={song.id}>
               <td>{song.id}</td>
               <td>{song.title}</td>
-              {/* <td>{song.team}</td> */}
+              <td>{song.team}</td>
               <td>{song.album?.title}</td>
               <td>{song.genres.map((g) => g.name).join(", ")}</td>
               <td>{song.path}</td>
