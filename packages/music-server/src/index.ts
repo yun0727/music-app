@@ -40,44 +40,34 @@ async function startServer() {
       credentials: true,
       methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
       allowedHeaders: [
-        "Content-Type", 
-        "Authorization", 
-        "x-apollo-operation-name", 
-        "apollo-require-preflight"
+        "Content-Type",
+        "Authorization",
+        "x-apollo-operation-name",
+        "apollo-require-preflight",
       ],
     })
   );
-  
+
   // Prisma Studio 엔드포인트 추가
   app.get("/prisma-studio", async (req, res) => {
     try {
       // 간단한 데이터베이스 뷰어 제공
-      const artists = await prisma.artist.findMany();
+
       const songs = await prisma.song.findMany({
         include: {
-          album: {
-            include: { artist: true }
-          },
-          genres: true
-        }
+          genres: true,
+        },
       });
-      const albums = await prisma.album.findMany({
-        include: { artist: true }
-      });
-      
+
       res.json({
-        artists,
         songs,
-        albums,
-        totalArtists: artists.length,
         totalSongs: songs.length,
-        totalAlbums: albums.length
       });
     } catch (error) {
       res.status(500).json({ error: (error as Error).message });
     }
   });
-  
+
   app.use("/audio", audioRouter);
   app.use("/music", musicRouter);
   app.use(express.json());

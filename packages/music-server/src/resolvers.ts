@@ -5,33 +5,11 @@ const prisma = new PrismaClient();
 export const resolvers = {
   Query: {
     genres: async () => prisma.genre.findMany(),
-    artists: async () =>
-      prisma.artist.findMany({
-        // include -> prisma에 작성된 relation 항목
-        include: { albums: true },
-      }),
-    artist: async (_: any, { id }: { id: string }) => {
-      const artist = await prisma.artist.findUnique({
-        where: { id: parseInt(id) },
-        include: { albums: true },
-      });
-      return artist;
-    },
     songs: async () =>
       prisma.song.findMany({
         include: {
           genres: true,
-          album: {
-            include: { artist: true },
-          },
           tags: true,
-        },
-      }),
-    albums: async () =>
-      prisma.album.findMany({
-        include: {
-          artist: true,
-          songs: true,
         },
       }),
     //query getMixMakers
@@ -41,9 +19,6 @@ export const resolvers = {
           songs: {
             include: {
               genres: true,
-              album: {
-                include: { artist: true },
-              },
             },
           },
         },
@@ -64,24 +39,18 @@ export const resolvers = {
       });
       return genre;
     },
-    addArtist: async (_: any, { name }: { name: string }) => {
-      const artist = await prisma.artist.create({
-        data: { name },
-      });
-      return artist;
-    },
     addSong: async (
       _: any,
       {
         title,
+        thumbnail,
         team,
-        albumId,
         genreIds,
         path,
       }: {
         title: string;
+        thumbnail: string;
         team: string;
-        albumId: string;
         genreIds: string[];
         path: string;
       }
@@ -89,50 +58,16 @@ export const resolvers = {
       const song = await prisma.song.create({
         data: {
           title,
+          thumbnail,
           team,
-          album: { connect: { id: parseInt(albumId) } },
           genres: { connect: genreIds.map((id) => ({ id: parseInt(id) })) },
           path,
         },
         include: {
-          album: true,
           genres: true,
         },
       });
       return song;
-    },
-    addAlbum: async (
-      _: any,
-      {
-        title,
-        releaseDate,
-        artistId,
-        thumbnail,
-      }: {
-        title: string;
-        releaseDate: string;
-        artistId: string;
-        thumbnail: string;
-      }
-    ) => {
-      const artist = await prisma.artist.findUnique({
-        where: { id: parseInt(artistId) },
-      });
-      if (!artist) {
-        throw new Error(`Artist with ID ${artistId} not found`);
-      }
-      const album = await prisma.album.create({
-        data: {
-          title,
-          releaseDate: new Date(releaseDate),
-          artist: { connect: { id: parseInt(artistId) } },
-          thumbnail,
-        },
-        include: {
-          artist: true,
-        },
-      });
-      return album;
     },
     addMixMaker: async (
       _: any,
@@ -191,9 +126,6 @@ export const resolvers = {
       const existingSong = await prisma.song.findUnique({
         where: { id: parseInt(id) },
         include: {
-          album: {
-            include: { artist: true },
-          },
           genres: true,
           tags: true,
           mixMakers: true,
@@ -208,9 +140,6 @@ export const resolvers = {
       const deletedSong = await prisma.song.delete({
         where: { id: parseInt(id) },
         include: {
-          album: {
-            include: { artist: true },
-          },
           genres: true,
           tags: true,
           mixMakers: true,

@@ -16,7 +16,7 @@ export const getMusicRecommendations = async (tags: string) => {
           and make path to this : 'www.naver.com'
           Provide the result in the following format:
         [
-          {"artist", "Artist Name", "title":"Song Title", "album": "Album Title"},  
+          {, "title":"Song Title", },  
         ]
           `,
         },

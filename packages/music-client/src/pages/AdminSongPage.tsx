@@ -2,19 +2,19 @@ import { useState } from "react";
 import useGetSongs from "@/hooks/useGetSongs";
 import useDeleteSong from "@/hooks/useDeleteSong";
 import useAddSong from "@/hooks/useAddSong";
-import useGetAlbums from "@/hooks/useGetAlbums";
+
 import useGetGenres from "@/hooks/useGetGenres";
 
 export default function AdminSongPage() {
   const { data: songs } = useGetSongs();
-  const { data: albums } = useGetAlbums();
+
   const { data: genres } = useGetGenres();
   const deleteSongMutation = useDeleteSong();
   const addSongMutation = useAddSong();
-  console.log(albums);
+
   const [title, setTitle] = useState("");
   const [team, setTeam] = useState("");
-  const [albumId, setAlbumId] = useState("1");
+
   const [genreIds, setGenreIds] = useState<string[]>([]);
   const [path, setPath] = useState("");
 
@@ -22,7 +22,7 @@ export default function AdminSongPage() {
   const handleAddSong = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!title || !team || !albumId || genreIds.length === 0 || !path) {
+    if (!title || !team || genreIds.length === 0 || !path) {
       alert("모든 필드를 입력해주세요.");
       return;
     }
@@ -31,7 +31,7 @@ export default function AdminSongPage() {
       await addSongMutation.mutateAsync({
         title,
         team,
-        albumId,
+
         genreIds,
         path,
       });
@@ -82,18 +82,6 @@ export default function AdminSongPage() {
           required
         />
         <select
-          value={albumId}
-          onChange={(e) => setAlbumId(e.target.value)}
-          required
-        >
-          <option value="">앨범 선택</option>
-          {albums?.map((album) => (
-            <option key={album.id} value={album.id}>
-              {album.title} - {album.artist.name}
-            </option>
-          ))}
-        </select>
-        <select
           multiple
           value={genreIds}
           onChange={(e) =>
@@ -131,7 +119,6 @@ export default function AdminSongPage() {
             <th>ID</th>
             <th>제목</th>
             <th>팀</th>
-            <th>앨범</th>
             <th>장르</th>
             <th>경로</th>
             <th>관리</th>
@@ -143,7 +130,6 @@ export default function AdminSongPage() {
               <td className="border-1  text-center">{song.id}</td>
               <td className="border-1  text-center">{song.title}</td>
               <td className="border-1  text-center">{song.team}</td>
-              <td className="border-1  text-center">{song.album?.title}</td>
               <td className="border-1  text-center">
                 {song.genres.map((g) => g.name).join(", ")}
               </td>

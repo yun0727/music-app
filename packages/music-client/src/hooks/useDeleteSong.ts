@@ -9,14 +9,6 @@ const DELETE_SONG = gql`
       title
       team
       path
-      album {
-        id
-        title
-        artist {
-          id
-          name
-        }
-      }
       genres {
         id
         name

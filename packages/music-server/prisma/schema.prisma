@@ -13,31 +13,13 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Artist {
-  id     Int     @id @default(autoincrement())
-  name   String
-  albums Album[]
-}
-
-model Album {
-  id          Int      @id @default(autoincrement())
-  title       String
-  releaseDate DateTime
-  thumbnail   String
-
-  artist   Artist @relation(fields: [artistId], references: [id])
-  artistId Int
-  songs    Song[]
-}
-
 model Song {
   id        Int        @id @default(autoincrement())
   title     String
+  thumbnail String
   path      String
   team      String
   genres    Genre[]    @relation("SongToGenre")
-  album     Album      @relation(fields: [albumId], references: [id], onDelete: Cascade)
-  albumId   Int
   mixMakers MixMaker[] @relation("SongToMixMaker")
   tags      Tag[]      @relation("SongToTag")
   createdAt DateTime   @default(now())

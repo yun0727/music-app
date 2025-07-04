@@ -6,29 +6,14 @@ const ADD_SONG = gql`
   mutation AddSong(
     $title: String!
     $team: String!
-    $albumId: ID!
     $genreIds: [ID!]!
     $path: String!
   ) {
-    addSong(
-      title: $title
-      team: $team
-      albumId: $albumId
-      genreIds: $genreIds
-      path: $path
-    ) {
+    addSong(title: $title, team: $team, genreIds: $genreIds, path: $path) {
       id
       title
       team
       path
-      album {
-        id
-        title
-        artist {
-          id
-          name
-        }
-      }
       genres {
         id
         name
@@ -40,7 +25,6 @@ const ADD_SONG = gql`
 interface AddSongVariables {
   title: string;
   team: string;
-  albumId: string;
   genreIds: string[];
   path: string;
 }

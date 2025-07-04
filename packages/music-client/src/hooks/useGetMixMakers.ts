@@ -11,15 +11,6 @@ const GET_MIX_MAKERS = gql`
       songs {
         id
         title
-        album {
-          id
-          title
-          artist {
-            id
-            name
-          }
-          thumbnail
-        }
       }
     }
   }

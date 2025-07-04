@@ -9,15 +9,6 @@ const GET_SONGS = gql`
       title
       path
       team
-      album {
-        artist {
-          id
-          name
-        }
-        id
-        title
-        thumbnail
-      }
       genres {
         id
         name

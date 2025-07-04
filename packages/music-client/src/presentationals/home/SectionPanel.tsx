@@ -33,12 +33,9 @@ export default function SectionPanel({
                 onItemClick(song);
               }}
             >
-              <SongCard.Image src={song.album.thumbnail} alt={song.title} />
+              {/* <SongCard.Image src={song.album.thumbnail} alt={song.title} /> */}
               <SongCard.Content>
                 <SongCard.Title>{song.title}</SongCard.Title>
-                <SongCard.Description>
-                  {song.album.artist.name}
-                </SongCard.Description>
               </SongCard.Content>
             </SongCard>
           ))}
