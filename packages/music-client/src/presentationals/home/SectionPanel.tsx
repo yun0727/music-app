@@ -1,5 +1,6 @@
 import Section from "@/presentationals/common/Section";
 import SongCard from "@/presentationals/common/SongCard";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   songs: Song[];
@@ -14,13 +15,21 @@ export default function SectionPanel({
   moreLink,
   onItemClick,
 }: Props) {
+  const navigate = useNavigate();
   return (
     <Section>
       <Section.Title className="flex justify-between">
         <span>{title}</span>
-        <a className="text-gray300 text-16 font-medium" href={moreLink}>
-          All
-        </a>
+        <div className="text-gray300 text-16 font-medium flex gap-10 items-center">
+          <a href={moreLink}>All</a>
+          <button
+            onClick={() => {
+              navigate("/admin-song");
+            }}
+          >
+            admin
+          </button>
+        </div>
       </Section.Title>
       <Section.Content>
         <div className="flex">
@@ -33,7 +42,7 @@ export default function SectionPanel({
                 onItemClick(song);
               }}
             >
-              {/* <SongCard.Image src={song.album.thumbnail} alt={song.title} /> */}
+              <SongCard.Image src={song.thumbnail} alt={song.title} />
               <SongCard.Content>
                 <SongCard.Title>{song.title}</SongCard.Title>
               </SongCard.Content>

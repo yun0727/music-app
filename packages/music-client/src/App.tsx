@@ -52,6 +52,7 @@ function App() {
 function TempComponent() {
   const { data } = useGetSongs();
   const { addToPlayList } = useAppStore();
+
   return (
     <SectionPanel
       onItemClick={(song) => addToPlayList([song])}

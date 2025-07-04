@@ -5,13 +5,15 @@ import { gql } from "graphql-request";
 const ADD_SONG = gql`
   mutation AddSong(
     $title: String!
+    $thumbnail: String!
     $team: String!
     $genreIds: [ID!]!
     $path: String!
   ) {
-    addSong(title: $title, team: $team, genreIds: $genreIds, path: $path) {
+    addSong(title: $title, thumbnail: $thumbnail, team: $team, genreIds: $genreIds, path: $path) {
       id
       title
+      thumbnail
       team
       path
       genres {
@@ -24,6 +26,7 @@ const ADD_SONG = gql`
 
 interface AddSongVariables {
   title: string;
+  thumbnail: string;
   team: string;
   genreIds: string[];
   path: string;

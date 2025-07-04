@@ -9,6 +9,7 @@ const GET_SONGS = gql`
       title
       path
       team
+      thumbnail
       genres {
         id
         name

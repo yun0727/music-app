@@ -4,6 +4,7 @@ import useDeleteSong from "@/hooks/useDeleteSong";
 import useAddSong from "@/hooks/useAddSong";
 
 import useGetGenres from "@/hooks/useGetGenres";
+import { useNavigate } from "react-router-dom";
 
 export default function AdminSongPage() {
   const { data: songs } = useGetSongs();
@@ -14,15 +15,17 @@ export default function AdminSongPage() {
 
   const [title, setTitle] = useState("");
   const [team, setTeam] = useState("");
+  const [thumbnail, setThumbnail] = useState("");
 
   const [genreIds, setGenreIds] = useState<string[]>([]);
   const [path, setPath] = useState("");
+  const navigate = useNavigate();
 
   // 곡 추가
   const handleAddSong = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!title || !team || genreIds.length === 0 || !path) {
+    if (!title || !team || !thumbnail || genreIds.length === 0 || !path) {
       alert("모든 필드를 입력해주세요.");
       return;
     }
@@ -30,8 +33,8 @@ export default function AdminSongPage() {
     try {
       await addSongMutation.mutateAsync({
         title,
+        thumbnail,
         team,
-
         genreIds,
         path,
       });
@@ -41,6 +44,7 @@ export default function AdminSongPage() {
       // 폼 초기화
       setTitle("");
       setTeam("");
+      setThumbnail("");
       setGenreIds([]);
       setPath("");
     } catch (error) {
@@ -64,6 +68,7 @@ export default function AdminSongPage() {
 
   return (
     <div className="bg-black h-full flex flex-col p-50 items-center mb-70">
+      <button onClick={() => navigate("/")}>홈으로 돌아가기</button>
       <h2 className="text-gray-400 text-50 mb-30">곡 관리(Admin)</h2>
       <form
         onSubmit={handleAddSong}
@@ -79,6 +84,12 @@ export default function AdminSongPage() {
           value={team}
           onChange={(e) => setTeam(e.target.value)}
           placeholder="팀"
+          required
+        />
+        <input
+          value={thumbnail}
+          onChange={(e) => setThumbnail(e.target.value)}
+          placeholder="썸네일 URL"
           required
         />
         <select

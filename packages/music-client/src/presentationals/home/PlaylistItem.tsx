@@ -93,7 +93,7 @@ export default function PlaylistItem({
         </Menu>
       )}
       <SongCard variant="horizontal">
-        {/* <SongCard.Image src={song.album.thumbnail} alt={song.title} /> */}
+        <SongCard.Image src={song.thumbnail} alt={song.title} />
         <SongCard.Content>
           <SongCard.Title>{song.title}</SongCard.Title>
         </SongCard.Content>
