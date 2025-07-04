@@ -1,86 +1,53 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import useGetSongs from "@/hooks/useGetSongs";
 import useDeleteSong from "@/hooks/useDeleteSong";
+import useAddSong from "@/hooks/useAddSong";
+import useGetAlbums from "@/hooks/useGetAlbums";
+import useGetGenres from "@/hooks/useGetGenres";
 
-const AdminSongPage: React.FC = () => {
-  const { data } = useGetSongs();
+export default function AdminSongPage() {
+  const { data: songs } = useGetSongs();
+  const { data: albums } = useGetAlbums();
+  const { data: genres } = useGetGenres();
   const deleteSongMutation = useDeleteSong();
-
-  // const [songs, setSongs] = useState<Song[]>([]);
+  const addSongMutation = useAddSong();
+  console.log(albums);
   const [title, setTitle] = useState("");
   const [team, setTeam] = useState("");
-  const [albumId, setAlbumId] = useState("");
+  const [albumId, setAlbumId] = useState("1");
   const [genreIds, setGenreIds] = useState<string[]>([]);
   const [path, setPath] = useState("");
-  // const [albums, setAlbums] = useState<{ id: string; title: string }[]>([]);
-  // const [genres, setGenres] = useState<{ id: string; name: string }[]>([]);
-  // const [loading, setLoading] = useState(false);
-
-  // 곡 목록 불러오기
-  // const fetchSongs = async () => {
-  //   setLoading(true);
-  //   const query = `
-  //     query {
-  //       songs {
-  //         id
-  //         title
-  //         team
-  //         path
-  //         album { id title }
-  //         genres { id name }
-  //       }
-  //     }
-  //   `;
-  //   const res = (await graphqlClient.request(query)) as { songs: Song[] };
-  //   setSongs(res.songs);
-  //   setLoading(false);
-  // };
-
-  // 앨범/장르 목록 불러오기
-  // const fetchAlbumsAndGenres = async () => {
-  //   const query = `
-  //     query {
-  //       albums { id title }
-  //       genres { id name }
-  //     }
-  //   `;
-  //   const res = (await graphqlClient.request(query)) as {
-  //     albums: { id: string; title: string }[];
-  //     genres: { id: string; name: string }[];
-  //   };
-  //   setAlbums(res.albums);
-  //   setGenres(res.genres);
-  // };
-
-  // useEffect(() => {
-  //   fetchSongs();
-  //   fetchAlbumsAndGenres();
-  // }, []);
 
   // 곡 추가
-  // const handleAddSong = async (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   const mutation = `
-  //     mutation AddSong($title: String!, $team: String!, $albumId: String!, $genreIds: [String!]!, $path: String!) {
-  //       addSong(title: $title, team: $team, albumId: $albumId, genreIds: $genreIds, path: $path) {
-  //         id
-  //       }
-  //     }
-  //   `;
-  //   await graphqlClient.request(mutation, {
-  //     title,
-  //     team,
-  //     albumId,
-  //     genreIds,
-  //     path,
-  //   });
-  //   setTitle("");
-  //   setTeam("");
-  //   setAlbumId("");
-  //   setGenreIds([]);
-  //   setPath("");
-  //   // fetchSongs();
-  // };
+  const handleAddSong = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!title || !team || !albumId || genreIds.length === 0 || !path) {
+      alert("모든 필드를 입력해주세요.");
+      return;
+    }
+
+    try {
+      await addSongMutation.mutateAsync({
+        title,
+        team,
+        albumId,
+        genreIds,
+        path,
+      });
+
+      alert("곡이 성공적으로 추가되었습니다.");
+
+      // 폼 초기화
+      setTitle("");
+      setTeam("");
+      setGenreIds([]);
+      setPath("");
+    } catch (error) {
+      console.error("추가 중 오류 발생:", error);
+      alert("곡 추가 중 오류가 발생했습니다.");
+    }
+  };
 
   // 곡 삭제
   const handleDeleteSong = async (songId: number) => {
@@ -88,7 +55,6 @@ const AdminSongPage: React.FC = () => {
       try {
         await deleteSongMutation.mutateAsync(songId);
         alert("곡이 성공적으로 삭제되었습니다.");
-        // 페이지를 새로고침하여 목록을 업데이트
       } catch (error) {
         console.error("삭제 중 오류 발생:", error);
         alert("삭제 중 오류가 발생했습니다.");
@@ -99,7 +65,10 @@ const AdminSongPage: React.FC = () => {
   return (
     <div className="bg-black h-full flex flex-col p-50 items-center mb-70">
       <h2 className="text-gray-400 text-50 mb-30">곡 관리(Admin)</h2>
-      <form className="flex flex-col gap-30">
+      <form
+        onSubmit={handleAddSong}
+        className="flex flex-col gap-30 text-black"
+      >
         <input
           value={title}
           onChange={(e) => setTitle(e.target.value)}
@@ -109,7 +78,7 @@ const AdminSongPage: React.FC = () => {
         <input
           value={team}
           onChange={(e) => setTeam(e.target.value)}
-          placeholder="팀/가수"
+          placeholder="팀"
           required
         />
         <select
@@ -118,11 +87,11 @@ const AdminSongPage: React.FC = () => {
           required
         >
           <option value="">앨범 선택</option>
-          {/* {albums.map((a) => (
-            <option key={a.id} value={a.id}>
-              {a.title}
+          {albums?.map((album) => (
+            <option key={album.id} value={album.id}>
+              {album.title} - {album.artist.name}
             </option>
-          ))} */}
+          ))}
         </select>
         <select
           multiple
@@ -131,11 +100,11 @@ const AdminSongPage: React.FC = () => {
             setGenreIds(Array.from(e.target.selectedOptions, (o) => o.value))
           }
         >
-          {/* {genres.map((g) => (
-            <option key={g.id} value={g.id}>
-              {g.name}
+          {genres?.map((genre) => (
+            <option key={genre.id} value={genre.id}>
+              {genre.name}
             </option>
-          ))} */}
+          ))}
         </select>
         <input
           value={path}
@@ -143,11 +112,13 @@ const AdminSongPage: React.FC = () => {
           placeholder="오디오 파일 경로"
           required
         />
-        <button type="submit">곡 추가</button>
+        <button className="text-white border-1 rounded-4" type="submit">
+          곡 추가
+        </button>
       </form>
 
       {/* 곡 목록 */}
-      <h3>곡 목록</h3>
+      <h3 className="mt-20 pb-20">곡 목록</h3>
 
       <table
         border={1}
@@ -167,7 +138,7 @@ const AdminSongPage: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {data?.map((song) => (
+          {songs?.map((song) => (
             <tr key={song.id}>
               <td className="border-1  text-center">{song.id}</td>
               <td className="border-1  text-center">{song.title}</td>
@@ -196,6 +167,4 @@ const AdminSongPage: React.FC = () => {
       </table>
     </div>
   );
-};
-
-export default AdminSongPage;
+}
