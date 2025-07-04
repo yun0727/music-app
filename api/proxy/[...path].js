@@ -1,7 +1,7 @@
 // @vercel/node
 export default async function handler(req, res) {
   const { path } = req.query;
-  const backendUrl = "http://3.37.17.190:4000";
+  const backendUrl = "http://3.34.103.45:4000";
 
   try {
     // GraphQL 요청인 경우 특별 처리

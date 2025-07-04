@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import useGetSongs from "@/hooks/useGetSongs";
+import useDeleteSong from "@/hooks/useDeleteSong";
 
 const AdminSongPage: React.FC = () => {
   const { data } = useGetSongs();
-  console.log(data);
+  const deleteSongMutation = useDeleteSong();
+
   // const [songs, setSongs] = useState<Song[]>([]);
   const [title, setTitle] = useState("");
   const [team, setTeam] = useState("");
@@ -81,10 +83,18 @@ const AdminSongPage: React.FC = () => {
   // };
 
   // 곡 삭제
-  // const handleDeleteSong = async () => {
-  //   // 실제 삭제 뮤테이션이 서버에 없다면, 구현 필요
-  //   alert("삭제 기능은 서버에 구현되어 있지 않습니다.");
-  // };
+  const handleDeleteSong = async (songId: number) => {
+    if (window.confirm("정말로 이 곡을 삭제하시겠습니까?")) {
+      try {
+        await deleteSongMutation.mutateAsync(songId);
+        alert("곡이 성공적으로 삭제되었습니다.");
+        // 페이지를 새로고침하여 목록을 업데이트
+      } catch (error) {
+        console.error("삭제 중 오류 발생:", error);
+        alert("삭제 중 오류가 발생했습니다.");
+      }
+    }
+  };
 
   return (
     <div className="bg-black h-full flex flex-col p-50 items-center mb-70">
@@ -142,9 +152,10 @@ const AdminSongPage: React.FC = () => {
       <table
         border={1}
         cellPadding={8}
-        style={{ width: "100%", borderCollapse: "collapse" }}
+        className="w-full border-1 "
+        // style={{ borderCollapse: "collapse" }}
       >
-        <thead>
+        <thead className="border-1">
           <tr>
             <th>ID</th>
             <th>제목</th>
@@ -158,14 +169,26 @@ const AdminSongPage: React.FC = () => {
         <tbody>
           {data?.map((song) => (
             <tr key={song.id}>
-              <td>{song.id}</td>
-              <td>{song.title}</td>
-              <td>{song.team}</td>
-              <td>{song.album?.title}</td>
-              <td>{song.genres.map((g) => g.name).join(", ")}</td>
-              <td>{song.path}</td>
-              <td>
-                <button onClick={() => {}}>삭제</button>
+              <td className="border-1  text-center">{song.id}</td>
+              <td className="border-1  text-center">{song.title}</td>
+              <td className="border-1  text-center">{song.team}</td>
+              <td className="border-1  text-center">{song.album?.title}</td>
+              <td className="border-1  text-center">
+                {song.genres.map((g) => g.name).join(", ")}
+              </td>
+              <td className="border-1  text-center">{song.path}</td>
+              <td className="border-1  text-center">
+                <button
+                  onClick={() => handleDeleteSong(song.id)}
+                  disabled={deleteSongMutation.isPending}
+                  className={`text-white px-8 py-4 rounded-4 ${
+                    deleteSongMutation.isPending
+                      ? "bg-[#666] cursor-not-allowed"
+                      : "bg-[#dc2626] cursor-pointer"
+                  }`}
+                >
+                  {deleteSongMutation.isPending ? "삭제 중..." : "삭제"}
+                </button>
               </td>
             </tr>
           ))}
