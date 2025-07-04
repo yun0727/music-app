@@ -14,6 +14,18 @@ export default function AdminSongPage() {
   const addSongMutation = useAddSong();
 
   const [title, setTitle] = useState("");
+  const teams = [
+    "두산 베어스",
+    "LG 트윈스",
+    "키움 히어로즈",
+    "SSG 랜더스",
+    "KIA 타이거즈",
+    "삼성 라이온즈",
+    " kt wiz",
+    "롯데 자이언츠",
+    "한화 이글스",
+    "NC 다이노스",
+  ];
   const [team, setTeam] = useState("");
   const [thumbnail, setThumbnail] = useState("");
 
@@ -43,7 +55,7 @@ export default function AdminSongPage() {
 
       // 폼 초기화
       setTitle("");
-      setTeam("");
+      setTeam("두산 베어스");
       setThumbnail("");
       setGenreIds([]);
       setPath("");
@@ -80,12 +92,11 @@ export default function AdminSongPage() {
           placeholder="곡 제목"
           required
         />
-        <input
-          value={team}
-          onChange={(e) => setTeam(e.target.value)}
-          placeholder="팀"
-          required
-        />
+        <select value={team} onChange={(e) => setTeam(e.target.value)}>
+          {teams.map((team) => (
+            <option value={team}>{team}</option>
+          ))}
+        </select>
         <input
           value={thumbnail}
           onChange={(e) => setThumbnail(e.target.value)}

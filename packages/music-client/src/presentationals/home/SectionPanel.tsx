@@ -21,7 +21,8 @@ export default function SectionPanel({
       <Section.Title className="flex justify-between">
         <span>{title}</span>
         <div className="text-gray300 text-16 font-medium flex gap-10 items-center">
-          <a href={moreLink}>All</a>
+          <a href={moreLink}>All </a>
+          <div>|</div>
           <button
             onClick={() => {
               navigate("/admin-song");
