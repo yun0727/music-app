@@ -36,7 +36,6 @@ export default function AdminSongPage() {
   // 곡 추가
   const handleAddSong = async (e: React.FormEvent) => {
     e.preventDefault();
-
     if (!title || !team || !thumbnail || genreIds.length === 0 || !path) {
       alert("모든 필드를 입력해주세요.");
       return;

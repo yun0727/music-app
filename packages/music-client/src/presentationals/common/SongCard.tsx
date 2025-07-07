@@ -86,7 +86,7 @@ function SongCardDescription({ children, className }: Cn<PropsWithChildren>) {
 
 function SongCardContent({ children, className }: Cn<PropsWithChildren>) {
   const { variant } = useContext(SongCardContext);
-  const variantClass = variant === "vertical" ? "gap-y-11" : "gap-y-7";
+  const variantClass = variant === "vertical" ? "gap-y-1" : "gap-y-7";
   return (
     <div className={tw(variantClass, "flex flex-col ", className)}>
       {children}

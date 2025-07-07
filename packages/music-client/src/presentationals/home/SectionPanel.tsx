@@ -1,6 +1,8 @@
 import Section from "@/presentationals/common/Section";
 import SongCard from "@/presentationals/common/SongCard";
+import Tag from "@/presentationals/tag/Tag";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 interface Props {
   songs: Song[];
@@ -16,6 +18,10 @@ export default function SectionPanel({
   onItemClick,
 }: Props) {
   const navigate = useNavigate();
+  const [selectedTeam, setSelectedTeam] = useState("전체");
+  console.log(selectedTeam);
+  console.log(songs.map((song) => song.team));
+
   return (
     <Section>
       <Section.Title className="flex justify-between">
@@ -32,23 +38,45 @@ export default function SectionPanel({
           </button>
         </div>
       </Section.Title>
+      {/* 팀 태그 */}
+      <Tag selectedTeam={selectedTeam} onTeamSelect={setSelectedTeam} />
       <Section.Content>
         <div className="flex">
-          {songs?.map((song) => (
-            <SongCard
-              key={song.id}
-              variant="vertical"
-              className="shrink-0"
-              onClick={() => {
-                onItemClick(song);
-              }}
-            >
-              <SongCard.Image src={song.thumbnail} alt={song.title} />
-              <SongCard.Content>
-                <SongCard.Title>{song.title}</SongCard.Title>
-              </SongCard.Content>
-            </SongCard>
-          ))}
+          {songs?.map((song) =>
+            selectedTeam === "전체" ? (
+              <SongCard
+                key={song.id}
+                variant="vertical"
+                className="shrink-0"
+                onClick={() => {
+                  onItemClick(song);
+                }}
+              >
+                <SongCard.Image src={song.thumbnail} alt={song.title} />
+                <SongCard.Content>
+                  <SongCard.Title>{song.title}</SongCard.Title>
+                  <SongCard.Description>{song.team}</SongCard.Description>
+                </SongCard.Content>
+              </SongCard>
+            ) : song.team === selectedTeam ? (
+              <SongCard
+                key={song.id}
+                variant="vertical"
+                className="shrink-0"
+                onClick={() => {
+                  onItemClick(song);
+                }}
+              >
+                <SongCard.Image src={song.thumbnail} alt={song.title} />
+                <SongCard.Content>
+                  <SongCard.Title>{song.title}</SongCard.Title>
+                  <SongCard.Description>{song.team}</SongCard.Description>
+                </SongCard.Content>
+              </SongCard>
+            ) : (
+              <></>
+            )
+          )}
         </div>
       </Section.Content>
     </Section>
