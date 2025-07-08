@@ -31,7 +31,7 @@ export default function AdminMixMakerPage() {
       setSongIds([]);
     } catch (error) {
       console.error("추가 중 오류 발생: ", error);
-      alert("오류 발생");
+      toast("오류 발생");
     }
   };
   const handleDeleteMixMaker = async (mixMakerId: string) => {

@@ -5,6 +5,7 @@ import useAddSong from "@/hooks/useAddSong";
 
 import useGetGenres from "@/hooks/useGetGenres";
 import AdminNavBar from "@/presentationals/common/AdminNavBar";
+import { Slide, toast, ToastContainer } from "react-toastify";
 
 export default function AdminSongPage() {
   const { data: songs } = useGetSongs();
@@ -34,11 +35,6 @@ export default function AdminSongPage() {
   // 곡 추가
   const handleAddSong = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!title || !team || !thumbnail || genreIds.length === 0 || !path) {
-      alert("모든 필드를 입력해주세요.");
-      return;
-    }
-
     try {
       await addSongMutation.mutateAsync({
         title,
@@ -48,7 +44,7 @@ export default function AdminSongPage() {
         path,
       });
 
-      alert("곡이 성공적으로 추가되었습니다.");
+      toast("곡이 성공적으로 추가되었습니다.");
 
       // 폼 초기화
       setTitle("");
@@ -58,7 +54,7 @@ export default function AdminSongPage() {
       setPath("");
     } catch (error) {
       console.error("추가 중 오류 발생:", error);
-      alert("곡 추가 중 오류가 발생했습니다.");
+      toast("곡 추가 중 오류가 발생했습니다.");
     }
   };
 
@@ -67,10 +63,10 @@ export default function AdminSongPage() {
     if (window.confirm("정말로 이 곡을 삭제하시겠습니까?")) {
       try {
         await deleteSongMutation.mutateAsync(songId);
-        alert("곡이 성공적으로 삭제되었습니다.");
+        toast("곡이 성공적으로 삭제되었습니다.");
       } catch (error) {
         console.error("삭제 중 오류 발생:", error);
-        alert("삭제 중 오류가 발생했습니다.");
+        toast("삭제 중 오류가 발생했습니다.");
       }
     }
   };
@@ -78,6 +74,12 @@ export default function AdminSongPage() {
   return (
     <div className="bg-black h-full flex flex-col p-50 items-center mb-70">
       <AdminNavBar />
+      <ToastContainer
+        position="top-center"
+        theme="dark"
+        autoClose={3000}
+        transition={Slide}
+      />
       <h2 className="text-gray-400 text-50 mb-30">곡 관리(Admin)</h2>
       <form
         onSubmit={handleAddSong}
