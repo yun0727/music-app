@@ -148,5 +148,16 @@ export const resolvers = {
 
       return deletedSong;
     },
+    deleteMixMaker: async (_: any, { id }: { id: string }) => {
+      const deletedMixMaker = await prisma.mixMaker.delete({
+        where: {
+          id: parseInt(id),
+        },
+        include: {
+          songs: true,
+        },
+      });
+      return deletedMixMaker;
+    },
   },
 };

@@ -4,11 +4,10 @@ import useDeleteSong from "@/hooks/useDeleteSong";
 import useAddSong from "@/hooks/useAddSong";
 
 import useGetGenres from "@/hooks/useGetGenres";
-import { useNavigate } from "react-router-dom";
+import AdminNavBar from "@/presentationals/common/AdminNavBar";
 
 export default function AdminSongPage() {
   const { data: songs } = useGetSongs();
-
   const { data: genres } = useGetGenres();
   const deleteSongMutation = useDeleteSong();
   const addSongMutation = useAddSong();
@@ -31,7 +30,6 @@ export default function AdminSongPage() {
 
   const [genreIds, setGenreIds] = useState<string[]>([]);
   const [path, setPath] = useState("");
-  const navigate = useNavigate();
 
   // 곡 추가
   const handleAddSong = async (e: React.FormEvent) => {
@@ -79,7 +77,7 @@ export default function AdminSongPage() {
 
   return (
     <div className="bg-black h-full flex flex-col p-50 items-center mb-70">
-      <button onClick={() => navigate("/")}>홈으로 돌아가기</button>
+      <AdminNavBar />
       <h2 className="text-gray-400 text-50 mb-30">곡 관리(Admin)</h2>
       <form
         onSubmit={handleAddSong}
@@ -135,7 +133,7 @@ export default function AdminSongPage() {
         className="w-full border-1 "
         // style={{ borderCollapse: "collapse" }}
       >
-        <thead className="border-1">
+        <thead>
           <tr>
             <th>ID</th>
             <th>제목</th>

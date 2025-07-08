@@ -26,12 +26,18 @@ export default function PlaylistItem({
   onLikeSong,
 }: Props) {
   const [open, setOpen] = useState(false);
-
   return (
-    <div className="flex relative" onClick={() => onClick(song)}>
+    <div
+      className="flex relative"
+      onClick={() => {
+        onClick(song);
+      }}
+    >
       <button
         className="absolute top-10 right-17 z-10"
-        onClick={() => setOpen((prev) => !prev)}
+        onClick={() => {
+          setOpen((prev) => !prev);
+        }}
       >
         <MenuIcon />
       </button>
@@ -96,6 +102,7 @@ export default function PlaylistItem({
         <SongCard.Image src={song.thumbnail} alt={song.title} />
         <SongCard.Content>
           <SongCard.Title>{song.title}</SongCard.Title>
+          <SongCard.Description>{song.team}</SongCard.Description>
         </SongCard.Content>
       </SongCard>
     </div>

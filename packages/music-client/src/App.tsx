@@ -14,6 +14,7 @@ import { ErrorBoundary } from "react-error-boundary";
 
 import AdminSongPage from "./pages/AdminSongPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import AdminMixMakerPage from "@/pages/AdminMixMakerPage";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +26,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/admin-song" element={<AdminSongPage />} />
+          <Route path="/admin-mix-maker" element={<AdminMixMakerPage />} />
           <Route
             path="/*"
             element={

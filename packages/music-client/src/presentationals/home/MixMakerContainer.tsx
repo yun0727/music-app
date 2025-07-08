@@ -1,9 +1,9 @@
-import useMixMakers from "@/hooks/useGetMixMakers";
+import useGetMixMakers from "@/hooks/useGetMixMakers";
 import MixMakerPanel from "@/presentationals/home/MixMakerPanel";
 import { useAppStore } from "@/store";
 
 export default function MixMakerContainer() {
-  const { data } = useMixMakers();
+  const { data } = useGetMixMakers();
   const { addToPlayList } = useAppStore();
   return data ? (
     <MixMakerPanel

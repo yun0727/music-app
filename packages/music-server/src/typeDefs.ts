@@ -46,5 +46,6 @@ export const typeDefs = gql`
     addTag(name: String!, songIds: [ID!]): Tag!
     addTagToSong(tagId: ID!, songId: ID!): Song!
     deleteSong(id: ID!): Song!
+    deleteMixMaker(id: ID!): MixMaker!
   }
 `;

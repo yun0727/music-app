@@ -16,7 +16,7 @@ const GET_MIX_MAKERS = gql`
   }
 `;
 
-export default function useMixMakers() {
+export default function useGetMixMakers() {
   return useQuery({
     queryKey: ["mixMakers"],
     queryFn: async () => {

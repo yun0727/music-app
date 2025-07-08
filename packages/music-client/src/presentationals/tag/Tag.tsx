@@ -22,6 +22,7 @@ export default function Tag({ selectedTeam, onTeamSelect }: TagProps) {
     <div className="flex w-[100%] pb-20 overflow-x-scroll gap-20 text-15 [&::-webkit-scrollbar]:hidden">
       {teams.map((team) => (
         <button
+          key={team}
           //누르면 필터 기능 적용
           onClick={() => {
             onTeamSelect(team);

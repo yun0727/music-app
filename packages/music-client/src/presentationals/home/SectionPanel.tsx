@@ -19,9 +19,6 @@ export default function SectionPanel({
 }: Props) {
   const navigate = useNavigate();
   const [selectedTeam, setSelectedTeam] = useState("전체");
-  console.log(selectedTeam);
-  console.log(songs.map((song) => song.team));
-
   return (
     <Section>
       <Section.Title className="flex justify-between">
