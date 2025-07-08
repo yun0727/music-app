@@ -1,4 +1,5 @@
 import useAddMixMaker from "@/hooks/useAddMixMaker";
+import useDeleteMixMaker from "@/hooks/useDeleteMixMaker";
 import useGetMixMakers from "@/hooks/useGetMixMakers";
 import useGetSongs from "@/hooks/useGetSongs";
 import AdminNavBar from "@/presentationals/common/AdminNavBar";
@@ -10,11 +11,11 @@ export default function AdminMixMakerPage() {
   const { data: mixMakers } = useGetMixMakers();
 
   const addMixMakerMutation = useAddMixMaker();
+  const deleteMixMakerMutation = useDeleteMixMaker();
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [songIds, setSongIds] = useState<string[]>([]);
-  console.log(songIds);
 
   const handleAddMixMaker = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,7 +34,17 @@ export default function AdminMixMakerPage() {
       alert("오류 발생");
     }
   };
-  // const handleDeleteMixMaker = (mixMakerId: string) => {};
+  const handleDeleteMixMaker = async (mixMakerId: string) => {
+    if (window.confirm("정말로 이 믹스메이커를 삭제하시겠습니까?")) {
+      try {
+        await deleteMixMakerMutation.mutateAsync(mixMakerId);
+        toast("믹스메이커가 성공적으로 삭제되었습니다.");
+      } catch (error) {
+        console.error("삭제 중 오류 발생:", error);
+        toast("삭제 중 오류가 발생했습니다.");
+      }
+    }
+  };
   return (
     <div className="bg-black h-full flex flex-col p-50 items-center mb-70">
       <ToastContainer
@@ -105,8 +116,13 @@ export default function AdminMixMakerPage() {
               </td>
               <td className="border-1  text-center">
                 <button
-                  // onClick={() => handleDeleteMixMaker(mixMaker.id)}
-                  className={`px-8 py-4 rounded-4`}
+                  onClick={() => handleDeleteMixMaker(mixMaker.id)}
+                  disabled={deleteMixMakerMutation.isPending}
+                  className={` px-8 py-4 rounded-4 ${
+                    deleteMixMakerMutation.isPending
+                      ? "bg-[#666] cursor-not-allowed"
+                      : "bg-[#dc2626] cursor-pointer"
+                  }`}
                 >
                   삭제
                 </button>

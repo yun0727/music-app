@@ -157,7 +157,7 @@ export default function AdminSongPage() {
                 <button
                   onClick={() => handleDeleteSong(song.id)}
                   disabled={deleteSongMutation.isPending}
-                  className={`text-white px-8 py-4 rounded-4 ${
+                  className={`px-8 py-4 rounded-4 ${
                     deleteSongMutation.isPending
                       ? "bg-[#666] cursor-not-allowed"
                       : "bg-[#dc2626] cursor-pointer"
