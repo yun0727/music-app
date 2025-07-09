@@ -1,10 +1,14 @@
+import { useAppStore } from "@/store";
 import { useEffect, useRef, useState } from "react";
 
 export default function useAudioPlayer() {
-  const [status, setStatus] = useState<AudioStatus>("stopped");
+  // const [status, setStatus] = useState<AudioStatus>("stopped");
   const [currentTime, setCurrentTime] = useState(0);
   const [volume, setVolume] = useState(1);
   const [duration, setDuration] = useState(0);
+
+  const { setAudioStatus } = useAppStore();
+
   const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
@@ -19,24 +23,30 @@ export default function useAudioPlayer() {
     const updateDuration = () => {
       setDuration(audio.duration);
     };
+    const handleEnded = () => {
+      setAudioStatus("stopped");
+    };
     audio.addEventListener("timeupdate", updateTime);
     audio.addEventListener("volumechange", updateVolume);
     audio.addEventListener("loadedmetadata", updateDuration);
+    audio.addEventListener("ended", handleEnded);
     // 해당 컴포넌트가 unmount 될 때 이벤트 리스너 제거
     return () => {
       audio.removeEventListener("timeupdate", updateTime);
       audio.removeEventListener("volumechange", updateVolume);
       audio.removeEventListener("loadedmetadata", updateDuration);
+      audio.removeEventListener("ended", handleEnded);
     };
   }, []);
 
   const play = () => {
     audioRef.current?.play();
-    setStatus("playing");
+    // setStatus("playing");
+    setAudioStatus("playing");
   };
   const pause = () => {
     audioRef.current?.pause();
-    setStatus("paused");
+    setAudioStatus("paused");
   };
 
   const changeCurrentTime = (seconds: number) => {
@@ -51,7 +61,6 @@ export default function useAudioPlayer() {
   };
   return {
     audioRef,
-    status,
     currentTime,
     volume,
     duration,

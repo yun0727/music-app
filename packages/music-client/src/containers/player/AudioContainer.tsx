@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import ProgressBar from "@/containers/player/ProgressBar";
 import VolumeController from "@/containers/player/VolumeController";
 import useAudioPlayer from "@/hooks/player/useAudioPlayer";
@@ -18,17 +19,31 @@ export default function AudioContainer({ src }: Props) {
     audioRef,
     play,
     pause,
-    status,
     duration,
     currentTime,
     volume,
     changeCurrentTime,
     changeVolume,
   } = useAudioPlayer();
-  const { togglePlayList } = useAppStore();
+  const { togglePlayList, audioStatus, setAudioStatus } = useAppStore();
 
   // Convert audio path to use proxy in production
   // const audioSrc = src ? getAudioUrl(src) : undefined;
+
+  // 오디오가 끝났을 때 상태 초기화
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const handleEnded = () => {
+      setAudioStatus("stopped");
+    };
+
+    audio.addEventListener("ended", handleEnded);
+    return () => {
+      audio.removeEventListener("ended", handleEnded);
+    };
+  }, [setAudioStatus, audioRef]);
 
   return (
     <div className="flex justify-center items-end pt-18 pb-22">
@@ -38,8 +53,8 @@ export default function AudioContainer({ src }: Props) {
           <PrevIcon className="rotate-180" />
 
           <PlayButton
-            status={status}
-            onToggle={status === "playing" ? pause : play}
+            status={audioStatus}
+            onToggle={audioStatus === "playing" ? pause : play}
           />
           <PrevIcon />
           <RepeatIcon />

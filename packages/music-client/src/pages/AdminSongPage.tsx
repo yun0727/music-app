@@ -48,7 +48,7 @@ export default function AdminSongPage() {
 
       // 폼 초기화
       setTitle("");
-      setTeam("두산 베어스");
+      setTeam("");
       setThumbnail("");
       setGenreIds([]);
       setPath("");
