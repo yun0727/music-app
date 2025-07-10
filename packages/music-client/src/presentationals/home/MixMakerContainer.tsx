@@ -1,4 +1,4 @@
-import useGetMixMakers from "@/hooks/useGetMixMakers";
+import useGetMixMakers from "@/hooks/get/useGetMixMakers";
 import MixMakerPanel from "@/presentationals/home/MixMakerPanel";
 import { useAppStore } from "@/store";
 

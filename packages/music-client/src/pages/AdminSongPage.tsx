@@ -1,15 +1,18 @@
 import { useState } from "react";
-import useGetSongs from "@/hooks/useGetSongs";
-import useDeleteSong from "@/hooks/useDeleteSong";
-import useAddSong from "@/hooks/useAddSong";
 
-import useGetGenres from "@/hooks/useGetGenres";
 import AdminNavBar from "@/presentationals/common/AdminNavBar";
 import { Slide, toast, ToastContainer } from "react-toastify";
+import useGetSongs from "@/hooks/get/useGetSongs";
+import useGetGenres from "@/hooks/get/useGetGenres";
+import useGetTags from "@/hooks/get/useGetTags";
+import useDeleteSong from "@/hooks/delete/useDeleteSong";
+import useAddSong from "@/hooks/add/useAddSong";
 
 export default function AdminSongPage() {
   const { data: songs } = useGetSongs();
   const { data: genres } = useGetGenres();
+  const { data: tags } = useGetTags();
+
   const deleteSongMutation = useDeleteSong();
   const addSongMutation = useAddSong();
 
@@ -28,7 +31,7 @@ export default function AdminSongPage() {
   ];
   const [team, setTeam] = useState("");
   const [thumbnail, setThumbnail] = useState("");
-
+  const [tagIds, setTagIds] = useState<string[]>([]);
   const [genreIds, setGenreIds] = useState<string[]>([]);
   const [path, setPath] = useState("");
 
@@ -40,6 +43,7 @@ export default function AdminSongPage() {
         title,
         thumbnail,
         team,
+        tagIds,
         genreIds,
         path,
       });
@@ -50,6 +54,7 @@ export default function AdminSongPage() {
       setTitle("");
       setTeam("");
       setThumbnail("");
+      setTagIds([]);
       setGenreIds([]);
       setPath("");
     } catch (error) {
@@ -104,6 +109,24 @@ export default function AdminSongPage() {
         />
         <select
           multiple
+          value={tagIds}
+          onChange={(e) => {
+            const selectedValue = e.target.value;
+            if (tagIds.includes(selectedValue)) {
+              setTagIds(tagIds.filter((id) => id !== selectedValue));
+            } else {
+              setTagIds([...tagIds, selectedValue]);
+            }
+          }}
+        >
+          {tags?.map((tag) => (
+            <option value={tag.id} key={tag.id}>
+              {tag.name}
+            </option>
+          ))}
+        </select>
+        <select
+          multiple
           value={genreIds}
           onChange={(e) =>
             setGenreIds(Array.from(e.target.selectedOptions, (o) => o.value))
@@ -140,6 +163,7 @@ export default function AdminSongPage() {
             <th>ID</th>
             <th>제목</th>
             <th>팀</th>
+            <th>태그</th>
             <th>장르</th>
             <th>경로</th>
             <th>관리</th>
@@ -151,6 +175,9 @@ export default function AdminSongPage() {
               <td className="border-1  text-center">{song.id}</td>
               <td className="border-1  text-center">{song.title}</td>
               <td className="border-1  text-center">{song.team}</td>
+              <td className="border-1  text-center">
+                {song.tags?.map((t) => t.name).join(", ")}
+              </td>
               <td className="border-1  text-center">
                 {song.genres.map((g) => g.name).join(", ")}
               </td>

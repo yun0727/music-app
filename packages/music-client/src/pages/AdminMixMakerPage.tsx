@@ -1,7 +1,8 @@
-import useAddMixMaker from "@/hooks/useAddMixMaker";
-import useDeleteMixMaker from "@/hooks/useDeleteMixMaker";
-import useGetMixMakers from "@/hooks/useGetMixMakers";
-import useGetSongs from "@/hooks/useGetSongs";
+import useAddMixMaker from "@/hooks/add/useAddMixMaker";
+import useDeleteMixMaker from "@/hooks/delete/useDeleteMixMaker";
+import useGetMixMakers from "@/hooks/get/useGetMixMakers";
+
+import useGetSongs from "@/hooks/get/useGetSongs";
 import AdminNavBar from "@/presentationals/common/AdminNavBar";
 import React, { useState } from "react";
 import { Slide, toast, ToastContainer } from "react-toastify";

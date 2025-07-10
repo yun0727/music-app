@@ -1,4 +1,4 @@
-import useGetRecommendations from "@/hooks/useGetRecommendations";
+import useGetRecommendations from "@/hooks/get/useGetRecommendations";
 import SectionPanel from "@/presentationals/home/SectionPanel";
 import { useAppStore } from "@/store";
 

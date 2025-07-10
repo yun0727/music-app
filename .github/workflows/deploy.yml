@@ -33,7 +33,7 @@ on:
 env:
   AWS_REGION: ap-northeast-2
   ECR_REPOSITORY: fastcampus/ai-music-app
-  ECS_SERVICE: ai-music-app-task-service-1
+  ECS_SERVICE: ai-music-app-task-service-7a1sk92s
   ECS_CLUSTER: ai-music-app-cluster
   ECS_TASK_DEFINITION: .aws/ai-music-app-task-revision36.json
   CONTAINER_NAME: ai-music-app-image

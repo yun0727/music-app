@@ -8,6 +8,7 @@ export default function AdminNavBar() {
       <button onClick={() => navigate("/")}>Home</button>
       <button onClick={() => navigate("/admin-song")}>Song</button>
       <button onClick={() => navigate("/admin-mix-maker")}>Mix Maker</button>
+      <button onClick={() => navigate("/admin-tag")}>Tag</button>
     </div>
   );
 }

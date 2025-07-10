@@ -1,6 +1,6 @@
 import PlaylistContainer from "@/containers/home/PlaylistContainer";
 import AudioContainer from "@/containers/player/AudioContainer";
-import useGetSongs from "@/hooks/useGetSongs";
+
 import ErrorFallBack from "@/presentationals/common/ErrorFallBack";
 import RootLayout from "@/presentationals/common/RootLayout";
 import SliderPanel from "@/presentationals/common/SliderPanel";
@@ -15,6 +15,8 @@ import { ErrorBoundary } from "react-error-boundary";
 import AdminSongPage from "./pages/AdminSongPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AdminMixMakerPage from "@/pages/AdminMixMakerPage";
+import useGetSongs from "@/hooks/get/useGetSongs";
+import AdminTagPage from "@/pages/AdminTagPage";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +29,7 @@ function App() {
         <Routes>
           <Route path="/admin-song" element={<AdminSongPage />} />
           <Route path="/admin-mix-maker" element={<AdminMixMakerPage />} />
+          <Route path="/admin-tag" element={<AdminTagPage />} />
           <Route
             path="/*"
             element={

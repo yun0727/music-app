@@ -122,21 +122,6 @@ export const resolvers = {
       return song;
     },
     deleteSong: async (_: any, { id }: { id: string }) => {
-      // 먼저 song이 존재하는지 확인
-      const existingSong = await prisma.song.findUnique({
-        where: { id: parseInt(id) },
-        include: {
-          genres: true,
-          tags: true,
-          mixMakers: true,
-        },
-      });
-
-      if (!existingSong) {
-        throw new Error(`Song with ID ${id} not found`);
-      }
-
-      // song을 삭제 (관계는 cascade로 자동 처리됨)
       const deletedSong = await prisma.song.delete({
         where: { id: parseInt(id) },
         include: {
@@ -159,5 +144,16 @@ export const resolvers = {
       });
       return deletedMixMaker;
     },
+  },
+  deleteTag: async (_: any, { id }: { id: string }) => {
+    const deletedTag = await prisma.tag.delete({
+      where: {
+        id: parseInt(id),
+      },
+      include: {
+        songs: true,
+      },
+    });
+    return deletedTag;
   },
 };
