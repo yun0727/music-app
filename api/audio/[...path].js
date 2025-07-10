@@ -1,7 +1,7 @@
 // @vercel/node
 export default async function handler(req, res) {
   const { path } = req.query;
-  const backendUrl = "http://43.200.172.27:4000:4000:4000";
+  const backendUrl = "http://43.202.157.192:4000:4000:4000";
 
   try {
     const response = await fetch(`${backendUrl}/audio/${path.join("/")}`, {

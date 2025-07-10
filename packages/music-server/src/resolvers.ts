@@ -144,16 +144,16 @@ export const resolvers = {
       });
       return deletedMixMaker;
     },
-  },
-  deleteTag: async (_: any, { id }: { id: string }) => {
-    const deletedTag = await prisma.tag.delete({
-      where: {
-        id: parseInt(id),
-      },
-      include: {
-        songs: true,
-      },
-    });
-    return deletedTag;
+    deleteTag: async (_: any, { id }: { id: string }) => {
+      const deletedTag = await prisma.tag.delete({
+        where: {
+          id: parseInt(id),
+        },
+        include: {
+          songs: true,
+        },
+      });
+      return deletedTag;
+    },
   },
 };
