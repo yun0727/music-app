@@ -90,17 +90,26 @@ export default function AdminSongPage() {
         onSubmit={handleAddSong}
         className="flex flex-col gap-30 text-black"
       >
-        <input
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="곡 제목"
-          required
-        />
-        <select value={team} onChange={(e) => setTeam(e.target.value)}>
-          {teams.map((team) => (
-            <option value={team}>{team}</option>
-          ))}
-        </select>
+        <div className="flex gap-[20px]">
+          <div className="text-white">제목 title</div>
+          <input
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="곡 제목"
+            required
+          />
+        </div>
+        <div className="flex gap-[20px]">
+          <div className="text-white">팀</div>
+          <select value={team} onChange={(e) => setTeam(e.target.value)}>
+            {teams.map((team) => (
+              <option value={team}>{team}</option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <div></div>
+        </div>
         <input
           value={thumbnail}
           onChange={(e) => setThumbnail(e.target.value)}

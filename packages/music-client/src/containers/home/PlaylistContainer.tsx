@@ -12,6 +12,7 @@ export default function PlaylistContainer() {
     playlist,
     playlists,
     setCurrentSong,
+    setCurrentSongIndex,
     removeFromPlayList,
     setPlaylist,
     addPlaylist,
@@ -67,6 +68,7 @@ export default function PlaylistContainer() {
                           onAddPlaylist={addPlaylist}
                           song={song}
                           onClick={(song) => {
+                            setCurrentSongIndex(index);
                             setCurrentSong(song);
                           }}
                           onRemoveFromPlaylist={(song) =>

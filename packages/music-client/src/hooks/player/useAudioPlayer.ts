@@ -7,7 +7,13 @@ export default function useAudioPlayer() {
   const [volume, setVolume] = useState(1);
   const [duration, setDuration] = useState(0);
 
-  const { setAudioStatus } = useAppStore();
+  const { 
+    setAudioStatus, 
+    playlist, 
+    currentSongIndex, 
+    setCurrentSong, 
+    setCurrentSongIndex 
+  } = useAppStore();
 
   const audioRef = useRef<HTMLAudioElement>(null);
 
@@ -24,7 +30,20 @@ export default function useAudioPlayer() {
       setDuration(audio.duration);
     };
     const handleEnded = () => {
-      setAudioStatus("stopped");
+      // 재생목록이 있고 현재 노래가 재생목록에 있는 경우에만 다음 노래 재생
+      if (playlist.length > 0 && currentSongIndex >= 0 && currentSongIndex < playlist.length - 1) {
+        const nextIndex = currentSongIndex + 1;
+        const nextSong = playlist[nextIndex];
+        setCurrentSongIndex(nextIndex);
+        setCurrentSong(nextSong);
+        setAudioStatus("playing");
+        // 다음 노래 재생
+        setTimeout(() => {
+          audioRef.current?.play();
+        }, 100);
+      } else {
+        setAudioStatus("stopped");
+      }
     };
     audio.addEventListener("timeupdate", updateTime);
     audio.addEventListener("volumechange", updateVolume);
@@ -37,7 +56,7 @@ export default function useAudioPlayer() {
       audio.removeEventListener("loadedmetadata", updateDuration);
       audio.removeEventListener("ended", handleEnded);
     };
-  }, []);
+  }, [playlist, currentSongIndex, setAudioStatus, setCurrentSong, setCurrentSongIndex]);
 
   const play = () => {
     audioRef.current?.play();
