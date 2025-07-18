@@ -14,7 +14,7 @@ export default async function handler(req, res) {
     return;
   }
 
-  const backendUrl = "http://43.202.157.192:4000:4000:4000";
+  const backendUrl = "http://43.202.157.192:4000";
 
   try {
     // For GraphQL requests, use the /graphql endpoint

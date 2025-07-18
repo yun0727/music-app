@@ -16,7 +16,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "http://43.202.157.192:4000:4000:4000/graphql",
+        target: "http://43.202.157.192:4000/graphql",
         changeOrigin: true,
         secure: false,
         rewrite: (path) => path.replace(/^\/api/, ""),
